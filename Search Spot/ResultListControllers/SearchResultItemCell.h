@@ -14,4 +14,6 @@
 
 @property (nonatomic,strong)  NSMetadataItem *itemObject;
 
+@property (assign) BOOL customSelection;
+
 @end

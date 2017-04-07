@@ -16,6 +16,7 @@
 		84181FFF1E9223B100F420F0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84181FFE1E9223B100F420F0 /* ViewController.m */; };
 		841820011E9223B100F420F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 841820001E9223B100F420F0 /* Assets.xcassets */; };
 		841820041E9223B100F420F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841820021E9223B100F420F0 /* Main.storyboard */; };
+		842198DC1E97468200D2C358 /* ItemDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842198DB1E97468200D2C358 /* ItemDetailsController.m */; };
 		843B95D01E93A52A0071C12F /* ResultGroupHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B95CE1E93A52A0071C12F /* ResultGroupHeader.m */; };
 		843B95D11E93A52A0071C12F /* ResultGroupHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843B95CF1E93A52A0071C12F /* ResultGroupHeader.xib */; };
 		84A060AE1E92A53200BDB71F /* QueryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A060AD1E92A53200BDB71F /* QueryManager.m */; };
@@ -40,6 +41,8 @@
 		841820001E9223B100F420F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		841820031E9223B100F420F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		841820051E9223B100F420F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		842198DA1E97468200D2C358 /* ItemDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemDetailsController.h; sourceTree = "<group>"; };
+		842198DB1E97468200D2C358 /* ItemDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemDetailsController.m; sourceTree = "<group>"; };
 		843B95CD1E93A52A0071C12F /* ResultGroupHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultGroupHeader.h; sourceTree = "<group>"; };
 		843B95CE1E93A52A0071C12F /* ResultGroupHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultGroupHeader.m; sourceTree = "<group>"; };
 		843B95CF1E93A52A0071C12F /* ResultGroupHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultGroupHeader.xib; sourceTree = "<group>"; };
@@ -67,6 +70,8 @@
 			children = (
 				8415F5CB1E93549C004C7595 /* ResultListCollectionController.h */,
 				8415F5CC1E93549C004C7595 /* ResultListCollectionController.m */,
+				842198DA1E97468200D2C358 /* ItemDetailsController.h */,
+				842198DB1E97468200D2C358 /* ItemDetailsController.m */,
 				8415F5D31E93658D004C7595 /* ResultListFlowLayout.h */,
 				8415F5D41E93658D004C7595 /* ResultListFlowLayout.m */,
 				8415F5CE1E935CA8004C7595 /* SearchResultItemCell.h */,
@@ -210,6 +215,7 @@
 				84181FFF1E9223B100F420F0 /* ViewController.m in Sources */,
 				84181FFC1E9223B100F420F0 /* main.m in Sources */,
 				8415F5D51E93658D004C7595 /* ResultListFlowLayout.m in Sources */,
+				842198DC1E97468200D2C358 /* ItemDetailsController.m in Sources */,
 				84A060AE1E92A53200BDB71F /* QueryManager.m in Sources */,
 				84181FF91E9223B100F420F0 /* AppDelegate.m in Sources */,
 				8415F5D11E935CA8004C7595 /* SearchResultItemCell.m in Sources */,
@@ -328,6 +334,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Search Spot/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.satendrasingh.Search-Spot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -340,6 +347,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Search Spot/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.satendrasingh.Search-Spot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -44,9 +44,9 @@
         [nf addObserver:self selector:@selector(queryNote:) name:nil object:self.query];
         
         // We want the items in the query to automatically be sorted by the file system name; this way, we don't have to do any special sorting
-        [self.query setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] ]];
+        [self.query setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSSize ascending:NO] ]];
         // For the groups, we want the first grouping by the kind, and the second by the file size.
-        [self.query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, (id)kMDItemFSSize, nil]];
+        [self.query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, nil]];
         [self.query setDelegate:self];
     }
     return self;
@@ -64,6 +64,11 @@
     if ([[note name] isEqualToString:NSMetadataQueryDidStartGatheringNotification]) {
         updateType =QueryDidStartGathering;
         // The gathering phase has just started!
+//        if (NO == [self.query.searchScopes containsObject:NSMetadataQueryLocalComputerScope]) {
+//            [self.query setSearchScopes:@[NSMetadataQueryLocalComputerScope]];
+//
+        
+//        }
         NSLog(@"Started gathering");
     } else if ([[note name] isEqualToString:NSMetadataQueryDidFinishGatheringNotification]) {
         updateType =QueryDidFinishGathering;
@@ -135,17 +140,17 @@
     NSPredicate *predicateToRun = nil;
     if (self.searchContent) {
         // In the example below, we create a predicate with a given format string that simply replaces %@ with the string that is to be searched for. By using "like", the query will end up doing a regular expression search similar to *foo* when you are searching for the word "foo". By using the [c], the NSCaseInsensitivePredicateOption will be set in the created predicate. The particular item type to search for, kMDItemTextContent, is described in MDItem.h.
-        NSString *predicateFormat = @"kMDItemTextContent contains[c] %@";
+        NSString *predicateFormat = @"kMDItemFSName contains[c] %@";
         predicateToRun = [NSPredicate predicateWithFormat:predicateFormat, self.searchKey];
     }
     
     // Create a compound predicate that searches for any keypath which has a value like the search key. This broadens the search results to include things such as the author, title, and other attributes not including the content. This is done in code for two reasons: 1. The predicate parser does not yet support "* = Foo" type of parsing, and 2. It is an example of creating a predicate in code, which is much "safer" than using a search string.
     NSUInteger options = (NSCaseInsensitivePredicateOption|NSDiacriticInsensitivePredicateOption);
     NSPredicate *compPred = [NSComparisonPredicate
-                             predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"*"]
+                             predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"kMDItemFSName"]
                              rightExpression:[NSExpression expressionForConstantValue:self.searchKey]
                              modifier:NSDirectPredicateModifier
-                             type:NSLikePredicateOperatorType
+                             type:NSBeginsWithPredicateOperatorType
                              options:options];
     
     // Combine the two predicates with an OR, if we are including the content as searchable
@@ -161,8 +166,18 @@
     predicateToRun = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:predicateToRun, emailExclusionPredicate, nil]];
     
     // Set it to the query. If the query already is alive, it will update immediately
+    NSLog(@"predicateToRun:\n%@",predicateToRun);
     [self.query setPredicate:predicateToRun];
-    
+    if (searchKey.length <=2) {
+        
+            [self.query setSearchScopes:@[@"/Applications",NSMetadataQueryUserHomeScope]];
+    }
+    else{
+            [self.query setSearchScopes:@[NSMetadataQueryLocalComputerScope]];
+
+    }
+//    [self.query setSearchScopes:@[@"/Applications"]];
+
     // In case the query hasn't yet started, start it.
     [self.query startQuery];
 }

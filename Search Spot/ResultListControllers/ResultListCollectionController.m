@@ -17,12 +17,17 @@
 
 @interface ResultListCollectionController()<NSSearchFieldDelegate>
 {
-    QueryManager *queryManager;
+   __block QueryManager *queryManager;
+        NSIndexPath *lastSelectedPath;
 }
 
 @property (nonatomic,assign) IBOutlet NSSearchField *searchFiled;
 
+@property (nonatomic,assign) IBOutlet NSTextField *bottomMessageFiled;
+
 @property (nonatomic,assign) IBOutlet NSCollectionView *resultsList;
+
+@property (nonatomic,assign) IBOutlet NSView *detailContainer;
 
 @end
 
@@ -81,6 +86,9 @@
     //    }
 }
 
+-(QueryManager *)queryManager{
+    return queryManager;
+}
 
 -(void)setupQueryResultManager{
     queryManager = [[QueryManager alloc] init];
@@ -91,14 +99,14 @@
         switch (changeType) {
             case QueryDidStartGathering:
             {
-                [weakSelf.resultsList reloadData];
+//                [weakSelf.resultsList reloadData];
 
                 
             }
                 break;
             case QueryDidFinishGathering:
             {
-                [weakSelf.resultsList reloadData];
+                [weakSelf refreshViewWithNewItemData];
             }
                 break;
                 
@@ -110,8 +118,7 @@
                 
             case QueryDidUpdateGathering:
             {
-                [weakSelf.resultsList reloadData];
-
+                [weakSelf refreshViewWithNewItemData];
             }
                 break;
                 
@@ -126,6 +133,15 @@
 
     [queryManager setSearchKey:keyword];
     
+}
+
+-(void) refreshViewWithNewItemData{
+    
+    NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:0];
+    [_resultsList reloadData];
+    [self collectionView:_resultsList didSelectItemsAtIndexPaths:[NSSet setWithObject:path]];
+    self.bottomMessageFiled.stringValue = [NSString stringWithFormat:@"Showing results for %lu items in %lu  Categories", [self queryManager].query.results.count,[self queryManager].query.groupedResults.count];
+
 }
 
 @end
@@ -156,6 +172,9 @@
     SearchResultItemCell *item = (SearchResultItemCell *)[collectionView makeItemWithIdentifier:SearchResultCellId forIndexPath:indexPath];
     NSMetadataQueryResultGroup *group = queryManager.query.groupedResults[indexPath.section];
     [item configureWithMeta:group.results[indexPath.item]];
+    if ([lastSelectedPath isEqual:indexPath]) {
+        item.customSelection = YES;
+    }
     return item;
 }
 
@@ -190,6 +209,33 @@
 - (NSSize)collectionView:(NSCollectionView *)collectionView layout:(NSCollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
     return NSMakeSize(collectionView.bounds.size.width, 20);
 
+}
+
+
+- (void)collectionView:(NSCollectionView *)collectionView didSelectItemsAtIndexPaths:(NSSet<NSIndexPath *> *)indexPaths {
+
+    if (1 == indexPaths.count) {
+        NSIndexPath *path = [[indexPaths allObjects] firstObject];
+//            NSMetadataQueryResultGroup *group = queryManager.query.groupedResults[path.section];
+//            NSMetadataItem *item = group.results[path.item];
+        SearchResultItemCell *viewItem = (SearchResultItemCell *)[collectionView itemAtIndexPath:path];
+        viewItem.customSelection = YES;
+        lastSelectedPath = path;
+
+    }
+//    
+}
+
+- (void)collectionView:(NSCollectionView *)collectionView didDeselectItemsAtIndexPaths:(NSSet<NSIndexPath *> *)indexPaths {
+    
+    if (1 == indexPaths.count) {
+        NSIndexPath *path = [[indexPaths allObjects] firstObject];
+//        NSMetadataQueryResultGroup *group = queryManager.query.groupedResults[path.section];
+        //            NSMetadataItem *item = group.results[path.item];
+        SearchResultItemCell *viewItem = (SearchResultItemCell *)[collectionView itemAtIndexPath:path];
+        viewItem.customSelection = NO;
+        lastSelectedPath = nil;
+    }
 }
 
 

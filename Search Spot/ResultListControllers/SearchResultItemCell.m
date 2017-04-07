@@ -27,10 +27,34 @@
     // Do view setup here.
 }
 
+- (void) setHighlightState:(NSCollectionViewItemHighlightState)highlightState{
+    switch (highlightState) {
+            
+        case NSCollectionViewItemHighlightForSelection:
+        {
+            
+        }
+            break;
+            
+        case NSCollectionViewItemHighlightNone:
+        {
+            
+        }
+            break;
+     
+        default:
+            break;
+    }
+}
+
 -(void)configureWithMeta:(NSMetadataItem *)item{
     self.itemObject = item;
 //    _itemTitle.stringValue = [self.itemObject valueForAttribute:(NSString *)kMDItemFSName];
 
 }
 
+-(void)prepareForReuse{
+    self.customSelection = NO;
+    [super prepareForReuse];
+}
 @end
