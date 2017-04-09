@@ -11,11 +11,12 @@
 #import "QueryManager.h"
 #import "ResultGroupHeader.h"
 #import "SearchResultItemCell.h"
+#import "ItemDetailsController.h"
 
 #define SearchResultCellId @"SearchResultItemCell"
 #define SearchHeaderId @"ResultGroupHeader"
 
-@interface ResultListCollectionController()<NSSearchFieldDelegate>
+@interface ResultListCollectionController()<NSSearchFieldDelegate, NSSplitViewDelegate>
 {
    __block QueryManager *queryManager;
         NSIndexPath *lastSelectedPath;
@@ -27,7 +28,9 @@
 
 @property (nonatomic,assign) IBOutlet NSCollectionView *resultsList;
 
-@property (nonatomic,assign) IBOutlet NSView *detailContainer;
+@property (nonatomic,assign) IBOutlet NSView *rightPaneView;
+
+@property (nonatomic,assign) IBOutlet ItemDetailsController *detailController;
 
 @end
 
@@ -47,6 +50,43 @@
     _resultsList.delegate = self;
     [_resultsList reloadData];
     // Do any additional setup after loading the view.
+}
+
+-(void)viewDidAppear{
+    [super viewDidAppear];
+    [[[NSApplication sharedApplication] mainWindow] performSelector:@selector(makeFirstResponder:) withObject:_searchFiled afterDelay:0.5];
+
+    
+}
+
+-(void)viewDidLayout{
+    [super viewDidLayout];
+    [_resultsList.collectionViewLayout invalidateLayout];
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex{
+    if (0 == dividerIndex) {
+        return 200.0;
+    }
+    else
+    {
+        return 250.0;//Not used so far. only one divider
+    }
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMaximumPosition ofSubviewAt:(NSInteger)dividerIndex{
+    if (0 == dividerIndex) {
+        return self.view.bounds.size.width - 250.0;
+    }
+    else
+    {
+        return 250.0;//Not used so far, only one divider
+    }
+}
+
+- (void)splitViewDidResizeSubviews:(NSNotification *)notification{
+    [_resultsList.collectionViewLayout invalidateLayout];
+
 }
 
 -(void)registerReusableNibs{
@@ -78,7 +118,7 @@
     [self searchStartForKeyword:_searchFiled.stringValue];
 //    [_resultsList reloadData];
 
-    //    NSUInteger resultCode=[[NSWorkspace sharedWorkspace] showSearchResultsForQueryString:_searchFiled.stringValue];
+    //    NSUInteger resultCodedae=[[NSWorkspace sharedWorkspace] showSearchResultsForQueryString:_searchFiled.stringValue];
     
     //    if (resultCode == NO) {
     //        // failed to open the panel
@@ -136,14 +176,29 @@
 }
 
 -(void) refreshViewWithNewItemData{
-    
-    NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:0];
-    [_resultsList reloadData];
-    [self collectionView:_resultsList didSelectItemsAtIndexPaths:[NSSet setWithObject:path]];
-    self.bottomMessageFiled.stringValue = [NSString stringWithFormat:@"Showing results for %lu items in %lu  Categories", [self queryManager].query.results.count,[self queryManager].query.groupedResults.count];
 
+//    [_detailController previewItemDetailsForItem:nil];
+
+    [self.resultsList reloadData];
+//    [self collectionView:_resultsList didSelectItemsAtIndexPaths:[NSSet setWithObject:path]];
+    [self performSelector:@selector(selectFirstObject) withObject:nil afterDelay:0.5];
 }
 
+-(void)selectFirstObject{
+    
+    if (queryManager.query.results.count) {
+        NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:0];
+        [self collectionView:_resultsList didSelectItemsAtIndexPaths:[NSSet setWithObject:path]];
+        self.bottomMessageFiled.stringValue = [NSString stringWithFormat:@"Showing results for %lu items in %lu  Categories", [self queryManager].query.results.count,[self queryManager].query.groupedResults.count];
+
+    }
+    else{
+        self.bottomMessageFiled.stringValue = @"";
+   
+    }
+ 
+
+}
 @end
 
 
@@ -215,15 +270,18 @@
 - (void)collectionView:(NSCollectionView *)collectionView didSelectItemsAtIndexPaths:(NSSet<NSIndexPath *> *)indexPaths {
 
     if (1 == indexPaths.count) {
+        
         NSIndexPath *path = [[indexPaths allObjects] firstObject];
-//            NSMetadataQueryResultGroup *group = queryManager.query.groupedResults[path.section];
-//            NSMetadataItem *item = group.results[path.item];
         SearchResultItemCell *viewItem = (SearchResultItemCell *)[collectionView itemAtIndexPath:path];
         viewItem.customSelection = YES;
         lastSelectedPath = path;
+        
+        NSMetadataQueryResultGroup *group = queryManager.query.groupedResults[path.section];
+        NSMetadataItem *item = group.results[path.item];
+        [_detailController previewItemDetailsForItem:item];
 
     }
-//    
+//
 }
 
 - (void)collectionView:(NSCollectionView *)collectionView didDeselectItemsAtIndexPaths:(NSSet<NSIndexPath *> *)indexPaths {
@@ -235,6 +293,8 @@
         SearchResultItemCell *viewItem = (SearchResultItemCell *)[collectionView itemAtIndexPath:path];
         viewItem.customSelection = NO;
         lastSelectedPath = nil;
+        [_detailController previewItemDetailsForItem:nil];
+
     }
 }
 

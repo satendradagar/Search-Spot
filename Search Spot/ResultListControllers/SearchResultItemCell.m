@@ -57,4 +57,42 @@
     self.customSelection = NO;
     [super prepareForReuse];
 }
+
+
+- (void)mouseDown:(NSEvent *)theEvent {
+    NSLog(@"entered mouseDown");
+    [super mouseDown:theEvent];
+ 
+}
+//
+- (void)rightMouseDown:(NSEvent *)theEvent {
+    NSLog(@"entered rightMouseDown");
+    NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Menu"];
+    [theMenu insertItemWithTitle:@"Open File" action:@selector(openFile:) keyEquivalent:@"" atIndex:0];
+    [theMenu insertItemWithTitle:@"Reveal In Finder" action:@selector(revealInFinder:) keyEquivalent:@"" atIndex:1];
+
+    [NSMenu popUpContextMenu:theMenu withEvent:theEvent forView:self.view];
+}
+
+-(void)openFile:(id)sender{
+    
+    NSString *filepath = [_itemObject valueForAttribute:(NSString *)kMDItemPath];
+    if (nil != filepath) {
+        [[NSWorkspace sharedWorkspace] openFile:filepath];
+        
+    }
+
+}
+
+-(void)revealInFinder:(id)sender{
+    
+    NSString *filepath = [_itemObject valueForAttribute:(NSString *)kMDItemPath];
+    if (nil != filepath) {
+//        [[NSWorkspace sharedWorkspace] openFile:filepath];
+        [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[[NSURL fileURLWithPath:filepath]]];
+        
+    }
+    
+}
+
 @end

@@ -95,3 +95,23 @@
 
 @end
 
+@implementation VersionTransformer
+
++ (Class)transformedValueClass {
+    return [NSString class];
+}
+
+- (id)transformedValue:(id)value {
+    if (value == nil) {
+        return nil;
+    }
+    if ([value isKindOfClass:[NSString class]]) {
+        NSString *versionNumber = (NSString *)value;
+        return [NSString stringWithFormat:@"Version %@",versionNumber];
+    } else {
+        [NSException raise:NSInvalidArgumentException format:@"Expecting only an NSMetadataitem"];
+        return nil;
+    }
+}
+
+@end

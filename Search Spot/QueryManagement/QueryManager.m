@@ -168,9 +168,15 @@
     // Set it to the query. If the query already is alive, it will update immediately
     NSLog(@"predicateToRun:\n%@",predicateToRun);
     [self.query setPredicate:predicateToRun];
-    if (searchKey.length <=2) {
+    if (searchKey.length <2) {
         
-            [self.query setSearchScopes:@[@"/Applications",NSMetadataQueryUserHomeScope]];
+            [self.query setSearchScopes:@[@"/Applications"]];
+    }
+    else if (searchKey.length ==2)
+    {
+        
+        [self.query setSearchScopes:@[@"/Applications",NSMetadataQueryUserHomeScope]];
+
     }
     else{
             [self.query setSearchScopes:@[NSMetadataQueryLocalComputerScope]];

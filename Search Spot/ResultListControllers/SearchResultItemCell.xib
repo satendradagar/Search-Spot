@@ -18,7 +18,7 @@
         <userDefaultsController representsSharedInstance="YES" id="zEX-rz-oKy"/>
         <box boxType="custom" borderType="none" id="Rjm-BU-jCt">
             <rect key="frame" x="0.0" y="0.0" width="474" height="60"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <view key="contentView" id="iDN-GQ-yCk">
                 <rect key="frame" x="0.0" y="0.0" width="474" height="60"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -19,3 +19,7 @@
 @interface MetadataItemIconTransformer : NSValueTransformer
 
 @end
+
+@interface VersionTransformer : NSValueTransformer
+
+@end
