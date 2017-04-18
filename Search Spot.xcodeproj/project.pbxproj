@@ -23,6 +23,7 @@
 		84A060AE1E92A53200BDB71F /* QueryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A060AD1E92A53200BDB71F /* QueryManager.m */; };
 		84A060B11E92A6A300BDB71F /* NSMetadataQuery+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A060B01E92A6A300BDB71F /* NSMetadataQuery+Utilities.m */; };
 		84A060B41E92A95200BDB71F /* MetaValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A060B31E92A95200BDB71F /* MetaValueTransformer.m */; };
+		84FC4CB41EA1B3B30076D14E /* SearchWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FC4CB31EA1B3B30076D14E /* SearchWindowController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,8 @@
 		84A060B01E92A6A300BDB71F /* NSMetadataQuery+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMetadataQuery+Utilities.m"; sourceTree = "<group>"; };
 		84A060B21E92A95200BDB71F /* MetaValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetaValueTransformer.h; sourceTree = "<group>"; };
 		84A060B31E92A95200BDB71F /* MetaValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetaValueTransformer.m; sourceTree = "<group>"; };
+		84FC4CB21EA1B3B30076D14E /* SearchWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchWindowController.h; path = "Search Spot/SearchWindowController/SearchWindowController.h"; sourceTree = "<group>"; };
+		84FC4CB31EA1B3B30076D14E /* SearchWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchWindowController.m; path = "Search Spot/SearchWindowController/SearchWindowController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,8 @@
 				84181FF61E9223B100F420F0 /* Search Spot */,
 				84181FF71E9223B100F420F0 /* AppDelegate.h */,
 				84181FF81E9223B100F420F0 /* AppDelegate.m */,
+				84FC4CB21EA1B3B30076D14E /* SearchWindowController.h */,
+				84FC4CB31EA1B3B30076D14E /* SearchWindowController.m */,
 				84181FFD1E9223B100F420F0 /* ViewController.h */,
 				84181FFE1E9223B100F420F0 /* ViewController.m */,
 				84181FF51E9223B100F420F0 /* Products */,
@@ -194,7 +199,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = "Satendra Singh";
+				ORGANIZATIONNAME = "Reboot Computer Services";
 				TargetAttributes = {
 					84181FF31E9223B100F420F0 = {
 						CreatedOnToolsVersion = 8.3;
@@ -239,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84FC4CB41EA1B3B30076D14E /* SearchWindowController.m in Sources */,
 				84A060B41E92A95200BDB71F /* MetaValueTransformer.m in Sources */,
 				843B95D01E93A52A0071C12F /* ResultGroupHeader.m in Sources */,
 				842198E51E974CD100D2C358 /* MetaLookObject.m in Sources */,
@@ -365,7 +371,7 @@
 				INFOPLIST_FILE = "Search Spot/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.satendrasingh.Search-Spot";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rebootServices.Search-Spot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -378,7 +384,7 @@
 				INFOPLIST_FILE = "Search Spot/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.satendrasingh.Search-Spot";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rebootServices.Search-Spot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -3,7 +3,7 @@
 //  Search Spot
 //
 //  Created by admin on 04/04/17.
-//  Copyright © 2017 Satendra Singh. All rights reserved.
+//  Copyright © 2017 Reboot Computer Services. All rights reserved.
 //
 
 #import "SearchResultItemCell.h"
@@ -50,7 +50,7 @@
 -(void)configureWithMeta:(NSMetadataItem *)item{
     self.itemObject = item;
 //    _itemTitle.stringValue = [self.itemObject valueForAttribute:(NSString *)kMDItemFSName];
-
+    NSLog(@"Support%@",[item valueForAttribute:kMDItemContentType]);
 }
 
 -(void)prepareForReuse{
@@ -83,7 +83,6 @@
     }
 
 }
-
 -(void)revealInFinder:(id)sender{
     
     NSString *filepath = [_itemObject valueForAttribute:(NSString *)kMDItemPath];

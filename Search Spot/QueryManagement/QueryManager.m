@@ -3,7 +3,7 @@
 //  Search Spot
 //
 //  Created by admin on 03/04/17.
-//  Copyright © 2017 Satendra Singh. All rights reserved.
+//  Copyright © 2017 Reboot Computer Services. All rights reserved.
 //
 
 #import "QueryManager.h"
@@ -13,6 +13,8 @@
 {
     NSMetadataQuery *query;
     NSString *searchKey;
+    NSString *groupKey;
+    
     BOOL searchContent;
 
 }
@@ -44,9 +46,9 @@
         [nf addObserver:self selector:@selector(queryNote:) name:nil object:self.query];
         
         // We want the items in the query to automatically be sorted by the file system name; this way, we don't have to do any special sorting
-        [self.query setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSSize ascending:NO] ]];
+        [self.query setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] ]];
         // For the groups, we want the first grouping by the kind, and the second by the file size.
-        [self.query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemKind, nil]];
+        [self.query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemCreator, nil]];
         [self.query setDelegate:self];
     }
     return self;
@@ -111,12 +113,15 @@
         // Figure out how many kb, mb, etc, that we have
         NSInteger numK = fsSize / 1024;
         if (numK < cutOff) {
-            return [NSString stringWithFormat:NSLocalizedString(@"%ld KB Files", @"File size, expressed in kilobytes"), (long)numK];
+            return NSLocalizedString(@"< 1 MB Files", @"File size, for items that are less than 1 megabytes");
+
+//            return [NSString stringWithFormat:NSLocalizedString(@"%ld KB Files", @"File size, expressed in kilobytes"), (long)numK];
         }
         
         NSInteger numMB = numK / 1024;
         if (numMB < cutOff) {
-            return [NSString stringWithFormat:NSLocalizedString(@"%ld MB Files", @"File size, expressed in megabytes"), (long)numMB];
+            return NSLocalizedString(@"< 1 GB Files", @"File size, for items that are less than 1 gegabytes");
+//            return [NSString stringWithFormat:NSLocalizedString(@"%ld MB Files", @"File size, expressed in megabytes"), (long)numMB];
         }
         
         return NSLocalizedString(@"Huge files", @"File size, for really large files");
@@ -127,10 +132,21 @@
         } else {
             return NSLocalizedString(@"Unknown", @"Kind to display for other unknown values");
         }
-    } else {
+    } else if([attrName isEqualToString:(id)kMDItemContentType]){
+        
+//        [[NSWorkspace sharedWorkspace] URLForApplicationToOpenURL:<#(nonnull NSURL *)#>]
+        return [self appPAthForContentType:attrValue];
+    }
+    else {
         return attrValue;
     }
     
+}
+
+-(NSString *)appPAthForContentType:(NSString *)type{
+    CFURLRef url = LSCopyDefaultApplicationURLForContentType((__bridge CFStringRef _Nonnull)(type),kLSRolesAll, nil);
+    return [[(__bridge NSURL *)url path] lastPathComponent];
+    return @"Others";
 }
 
 - (void)createSearchPredicate {
@@ -205,6 +221,17 @@
         [self createSearchPredicate];
     }
 }
+
+
+- (void)setGroupByKey:(NSString *) key {
+    if (groupKey != key) {
+        groupKey = [key copy];
+//        [self.query setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:(id)groupKey ascending:YES] ]];
+
+        [self.query setGroupingAttributes:[NSArray arrayWithObjects:(id)groupKey, nil]];
+    }
+}
+
 
 - (NSString *)searchKey {
     return searchKey;

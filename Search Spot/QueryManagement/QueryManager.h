@@ -3,7 +3,7 @@
 //  Search Spot
 //
 //  Created by admin on 03/04/17.
-//  Copyright © 2017 Satendra Singh. All rights reserved.
+//  Copyright © 2017 Reboot Computer Services. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -30,6 +30,8 @@ typedef void(^QueryResultChange)(NSMetadataQueryChangeType changeType);
 // Expose searchKey so that the NSTextField for searching can easily be typed into and update the query as needed
 //@property(copy) NSString *searchKey;
 - (void)setSearchKey:(NSString *) value;
+
+- (void)setGroupByKey:(NSString *) key;
 
 //@property BOOL searchContent;
 - (void)setSearchContent:(BOOL)value;

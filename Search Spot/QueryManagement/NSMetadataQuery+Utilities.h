@@ -3,7 +3,7 @@
 //  Search Spot
 //
 //  Created by admin on 03/04/17.
-//  Copyright © 2017 Satendra Singh. All rights reserved.
+//  Copyright © 2017 Reboot Computer Services. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

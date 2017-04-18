@@ -3,7 +3,7 @@
 //  Search Spot
 //
 //  Created by admin on 04/04/17.
-//  Copyright © 2017 Satendra Singh. All rights reserved.
+//  Copyright © 2017 Reboot Computer Services. All rights reserved.
 //
 
 #import "ResultListCollectionController.h"
@@ -16,13 +16,11 @@
 #define SearchResultCellId @"SearchResultItemCell"
 #define SearchHeaderId @"ResultGroupHeader"
 
-@interface ResultListCollectionController()<NSSearchFieldDelegate, NSSplitViewDelegate>
+@interface ResultListCollectionController()<NSSplitViewDelegate>
 {
    __block QueryManager *queryManager;
         NSIndexPath *lastSelectedPath;
 }
-
-@property (nonatomic,assign) IBOutlet NSSearchField *searchFiled;
 
 @property (nonatomic,assign) IBOutlet NSTextField *bottomMessageFiled;
 
@@ -31,6 +29,8 @@
 @property (nonatomic,assign) IBOutlet NSView *rightPaneView;
 
 @property (nonatomic,assign) IBOutlet ItemDetailsController *detailController;
+
+@property (nonatomic,assign) IBOutlet NSMenu *arrangeBy;
 
 @end
 
@@ -43,10 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupQueryResultManager];
-    _searchFiled.delegate = self;
-//    SearchResultItemCell
 
-    _resultsList.dataSource = self;
     _resultsList.delegate = self;
     [_resultsList reloadData];
     // Do any additional setup after loading the view.
@@ -54,7 +51,7 @@
 
 -(void)viewDidAppear{
     [super viewDidAppear];
-    [[[NSApplication sharedApplication] mainWindow] performSelector:@selector(makeFirstResponder:) withObject:_searchFiled afterDelay:0.5];
+//    [[[NSApplication sharedApplication] mainWindow] performSelector:@selector(makeFirstResponder:) withObject:_searchFiled afterDelay:0.5];
 
     
 }
@@ -100,30 +97,6 @@
     [super setRepresentedObject:representedObject];
     
     // Update the view, if already loaded.
-}
-
-- (void)searchFieldDidStartSearching:(NSSearchField *)sender {
-    
-    NSLog(@"searchFieldDidStartSearching: %@",_searchFiled.stringValue);
-}
-
-- (void)searchFieldDidEndSearching:(NSSearchField *)sender {
-    
-    NSLog(@"searchFieldDidEndSearching: %@",_searchFiled.stringValue);
-    
-}
-
-- (void)controlTextDidChange:(NSNotification *)obj{
-    NSLog(@"controlTextDidChange: %@",_searchFiled.stringValue);
-    [self searchStartForKeyword:_searchFiled.stringValue];
-//    [_resultsList reloadData];
-
-    //    NSUInteger resultCodedae=[[NSWorkspace sharedWorkspace] showSearchResultsForQueryString:_searchFiled.stringValue];
-    
-    //    if (resultCode == NO) {
-    //        // failed to open the panel
-    //        // present an error to the user
-    //    }
 }
 
 -(QueryManager *)queryManager{
@@ -172,6 +145,12 @@
 -(void)searchStartForKeyword:(NSString *)keyword{
 
     [queryManager setSearchKey:keyword];
+    
+}
+
+- (void)rearrangeWithGroupBy:(NSString *) key{
+    
+    [queryManager setGroupByKey:key];
     
 }
 
@@ -297,6 +276,5 @@
 
     }
 }
-
 
 @end

@@ -3,7 +3,7 @@
 //  Search Spot
 //
 //  Created by admin on 03/04/17.
-//  Copyright © 2017 Satendra Singh. All rights reserved.
+//  Copyright © 2017 Reboot Computer Services. All rights reserved.
 //
 
 #import "MetaValueTransformer.h"
@@ -48,7 +48,12 @@
     NSInteger fsSize = [value integerValue];
     // special case for small files
     if (fsSize == 0) {
-        return NSLocalizedString(@"0 Bytes", @"File size shown for 0 byte files");
+        if ([value isKindOfClass:[NSString class]]) {
+            return value;
+        }
+        else{
+            return NSLocalizedString(@"0 Bytes", @"File size shown for 0 byte files");
+        }
     }
     
     const NSInteger cutOff = 900;
