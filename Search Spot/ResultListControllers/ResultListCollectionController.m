@@ -148,6 +148,13 @@
     
 }
 
+-(void)searchScopeForLocation:(NSArray *)locations{
+
+    [queryManager setScopePath:locations];
+
+}
+
+
 - (void)rearrangeWithGroupBy:(NSString *) key{
     
     [queryManager setGroupByKey:key];

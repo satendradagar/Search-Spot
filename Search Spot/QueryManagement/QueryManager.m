@@ -134,8 +134,8 @@
         }
     } else if([attrName isEqualToString:(id)kMDItemContentType]){
         
-//        [[NSWorkspace sharedWorkspace] URLForApplicationToOpenURL:<#(nonnull NSURL *)#>]
-        return [self appPAthForContentType:attrValue];
+        return [self appPAthForContentType:attrValue];//Specific supported app name
+        
     }
     else {
         return attrValue;
@@ -145,8 +145,12 @@
 
 -(NSString *)appPAthForContentType:(NSString *)type{
     CFURLRef url = LSCopyDefaultApplicationURLForContentType((__bridge CFStringRef _Nonnull)(type),kLSRolesAll, nil);
-    return [[(__bridge NSURL *)url path] lastPathComponent];
-    return @"Others";
+    NSString *appName = [[[(__bridge NSURL *)url path] lastPathComponent] stringByDeletingPathExtension];
+    if (NULL != url) {
+        CFRelease(url);
+        return appName;
+    }
+    return @"Unknown";
 }
 
 - (void)createSearchPredicate {
@@ -166,9 +170,14 @@
                              predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"kMDItemFSName"]
                              rightExpression:[NSExpression expressionForConstantValue:self.searchKey]
                              modifier:NSDirectPredicateModifier
-                             type:NSBeginsWithPredicateOperatorType
+                             type:NSContainsPredicateOperatorType
                              options:options];
-    
+//    NSPredicate *compPred = [NSComparisonPredicate
+//                             predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"*"]
+//                             rightExpression:[NSExpression expressionForConstantValue:self.searchKey]
+//                             modifier:NSDirectPredicateModifier
+//                             type:NSLikePredicateOperatorType
+//                             options:options];
     // Combine the two predicates with an OR, if we are including the content as searchable
     if (self.searchContent) {
         predicateToRun = [NSCompoundPredicate orPredicateWithSubpredicates:[NSArray arrayWithObjects:compPred, predicateToRun, nil]];
@@ -184,20 +193,20 @@
     // Set it to the query. If the query already is alive, it will update immediately
     NSLog(@"predicateToRun:\n%@",predicateToRun);
     [self.query setPredicate:predicateToRun];
-    if (searchKey.length <2) {
-        
-            [self.query setSearchScopes:@[@"/Applications"]];
-    }
-    else if (searchKey.length ==2)
-    {
-        
-        [self.query setSearchScopes:@[@"/Applications",NSMetadataQueryUserHomeScope]];
-
-    }
-    else{
-            [self.query setSearchScopes:@[NSMetadataQueryLocalComputerScope]];
-
-    }
+//    if (searchKey.length <2) {
+//        
+//            [self.query setSearchScopes:@[@"/Applications"]];
+//    }
+//    else if (searchKey.length ==2)
+//    {
+//        
+//        [self.query setSearchScopes:@[@"/Applications",NSMetadataQueryUserHomeScope]];
+//
+//    }
+//    else{
+//            [self.query setSearchScopes:@[NSMetadataQueryLocalComputerScope]];
+//
+//    }
 //    [self.query setSearchScopes:@[@"/Applications"]];
 
     // In case the query hasn't yet started, start it.
@@ -222,12 +231,17 @@
     }
 }
 
+- (void)setScopePath:(NSArray *) values{
+    
+    [self.query setSearchScopes:values];
+}
+
 
 - (void)setGroupByKey:(NSString *) key {
     if (groupKey != key) {
         groupKey = [key copy];
 //        [self.query setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:(id)groupKey ascending:YES] ]];
-
+        [self.query setValueListAttributes:@[groupKey]];
         [self.query setGroupingAttributes:[NSArray arrayWithObjects:(id)groupKey, nil]];
     }
 }

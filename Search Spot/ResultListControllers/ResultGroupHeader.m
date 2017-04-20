@@ -17,10 +17,14 @@
 
 @implementation ResultGroupHeader
 
+-(void)awakeFromNib{
+    [super awakeFromNib];
+    _groupTitle.textColor = [NSColor whiteColor];
+
+}
 -(void)configureWithGroup:(NSMetadataQueryResultGroup *)group{
     groupObject = group;
     _groupTitle.stringValue = [groupObject.value description];
-    _groupTitle.textColor = [NSColor headerTextColor];
     
 }
 

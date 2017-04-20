@@ -12,6 +12,8 @@
 
 - (void)rearrangeWithGroupBy:(NSString *) key;
 
+-(void)searchScopeForLocation:(NSArray *)locations;
+
 -(void)searchStartForKeyword:(NSString *)keyword;
 
 @end

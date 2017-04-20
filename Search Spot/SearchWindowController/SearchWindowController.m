@@ -9,10 +9,14 @@
 #import "SearchWindowController.h"
 
 @interface SearchWindowController ()<NSSearchFieldDelegate>
-
+{
+    NSMenuItem *lastSelectedItem;
+}
 @property (nonatomic,assign) IBOutlet NSMenu *arrangeBy;
 
 @property (nonatomic,assign) IBOutlet NSSearchField *searchFiled;
+
+@property (nonatomic,assign) IBOutlet NSPopUpButton *arrangeButton;
 
 @end
 
@@ -23,7 +27,9 @@
     self.listController = (ResultListCollectionController *)[self.window contentViewController];
     _searchFiled.delegate = self;
     [self.window performSelector:@selector(makeFirstResponder:) withObject:_searchFiled afterDelay:0.2];
-
+    NSMenuItem *item = [_arrangeBy itemAtIndex:2];
+    [_arrangeButton selectItem: item];
+    [self seectionDidChanged:_arrangeButton];
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
@@ -91,6 +97,10 @@
         default:
             break;
     }
+    NSMenuItem *selected = sender.selectedItem;
+    [selected setState:NSOnState];
+    [lastSelectedItem setState:NSOffState];
+    lastSelectedItem = selected;
     [_listController rearrangeWithGroupBy:(__bridge NSString *)groupString];
 //    [sender.menu selectItemAtIndex:selectedArrange];
 }

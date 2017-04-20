@@ -23,6 +23,8 @@
 		84A060AE1E92A53200BDB71F /* QueryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A060AD1E92A53200BDB71F /* QueryManager.m */; };
 		84A060B11E92A6A300BDB71F /* NSMetadataQuery+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A060B01E92A6A300BDB71F /* NSMetadataQuery+Utilities.m */; };
 		84A060B41E92A95200BDB71F /* MetaValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A060B31E92A95200BDB71F /* MetaValueTransformer.m */; };
+		84AF84CF1EA6766500C732BE /* SearchScopeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AF84CE1EA6766500C732BE /* SearchScopeController.m */; };
+		84AF84D21EA7469700C732BE /* NSFileManager+UnhiddenDirectories.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AF84D11EA7469700C732BE /* NSFileManager+UnhiddenDirectories.m */; };
 		84FC4CB41EA1B3B30076D14E /* SearchWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FC4CB31EA1B3B30076D14E /* SearchWindowController.m */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +58,10 @@
 		84A060B01E92A6A300BDB71F /* NSMetadataQuery+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMetadataQuery+Utilities.m"; sourceTree = "<group>"; };
 		84A060B21E92A95200BDB71F /* MetaValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetaValueTransformer.h; sourceTree = "<group>"; };
 		84A060B31E92A95200BDB71F /* MetaValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetaValueTransformer.m; sourceTree = "<group>"; };
+		84AF84CD1EA6766500C732BE /* SearchScopeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchScopeController.h; sourceTree = "<group>"; };
+		84AF84CE1EA6766500C732BE /* SearchScopeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchScopeController.m; sourceTree = "<group>"; };
+		84AF84D01EA7469700C732BE /* NSFileManager+UnhiddenDirectories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+UnhiddenDirectories.h"; path = "Search Spot/NSFileManager+UnhiddenDirectories.h"; sourceTree = "<group>"; };
+		84AF84D11EA7469700C732BE /* NSFileManager+UnhiddenDirectories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+UnhiddenDirectories.m"; path = "Search Spot/NSFileManager+UnhiddenDirectories.m"; sourceTree = "<group>"; };
 		84FC4CB21EA1B3B30076D14E /* SearchWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchWindowController.h; path = "Search Spot/SearchWindowController/SearchWindowController.h"; sourceTree = "<group>"; };
 		84FC4CB31EA1B3B30076D14E /* SearchWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchWindowController.m; path = "Search Spot/SearchWindowController/SearchWindowController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +104,8 @@
 				84FC4CB31EA1B3B30076D14E /* SearchWindowController.m */,
 				84181FFD1E9223B100F420F0 /* ViewController.h */,
 				84181FFE1E9223B100F420F0 /* ViewController.m */,
+				84AF84D01EA7469700C732BE /* NSFileManager+UnhiddenDirectories.h */,
+				84AF84D11EA7469700C732BE /* NSFileManager+UnhiddenDirectories.m */,
 				84181FF51E9223B100F420F0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,6 +121,7 @@
 		84181FF61E9223B100F420F0 /* Search Spot */ = {
 			isa = PBXGroup;
 			children = (
+				84AF84CC1EA6745700C732BE /* SearchScopeController */,
 				84A060AB1E92A53200BDB71F /* QueryManagement */,
 				842198E11E974C7100D2C358 /* ModelObjects */,
 				842198DD1E974C0E00D2C358 /* DetailsController */,
@@ -171,6 +180,16 @@
 			);
 			path = QueryManagement;
 			sourceTree = "<group>";
+		};
+		84AF84CC1EA6745700C732BE /* SearchScopeController */ = {
+			isa = PBXGroup;
+			children = (
+				84AF84CD1EA6766500C732BE /* SearchScopeController.h */,
+				84AF84CE1EA6766500C732BE /* SearchScopeController.m */,
+			);
+			name = SearchScopeController;
+			path = "Search Spot/SearchScopeController";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -244,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84AF84CF1EA6766500C732BE /* SearchScopeController.m in Sources */,
 				84FC4CB41EA1B3B30076D14E /* SearchWindowController.m in Sources */,
 				84A060B41E92A95200BDB71F /* MetaValueTransformer.m in Sources */,
 				843B95D01E93A52A0071C12F /* ResultGroupHeader.m in Sources */,
@@ -253,6 +273,7 @@
 				8415F5D51E93658D004C7595 /* ResultListFlowLayout.m in Sources */,
 				842198E01E974C0E00D2C358 /* ItemDetailsController.m in Sources */,
 				84A060AE1E92A53200BDB71F /* QueryManager.m in Sources */,
+				84AF84D21EA7469700C732BE /* NSFileManager+UnhiddenDirectories.m in Sources */,
 				84181FF91E9223B100F420F0 /* AppDelegate.m in Sources */,
 				8415F5D11E935CA8004C7595 /* SearchResultItemCell.m in Sources */,
 				8415F5CD1E93549C004C7595 /* ResultListCollectionController.m in Sources */,
