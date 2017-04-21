@@ -161,6 +161,11 @@
     
 }
 
+- (void)setSearchByKey:(NSString *) key{
+
+    [queryManager setSearchByKey:key];
+}
+
 -(void) refreshViewWithNewItemData{
 
 //    [_detailController previewItemDetailsForItem:nil];

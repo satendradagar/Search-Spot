@@ -14,7 +14,7 @@
     NSMetadataQuery *query;
     NSString *searchKey;
     NSString *groupKey;
-    
+    NSString *searchByKey;
     BOOL searchContent;
 
 }
@@ -39,6 +39,8 @@
 - (id)init {
     if (self = [super init]) {
         self.searchKey = @"";
+        
+        searchByKey = (NSString *)kMDItemFSName;//Default search by File system name
         
         self.query = [[NSMetadataQuery alloc] init] ;
         // To watch results send by the query, add an observer to the NSNotificationCenter
@@ -154,23 +156,31 @@
 }
 
 - (void)createSearchPredicate {
+    
+    if (0 == searchKey.length || 0 == searchByKey.length) {
+        return;//Skip intitally for wildcard search
+    }
     // This demonstrates a few ways to create a search predicate.
     
     // The user can set the checkbox to include this in the search result, or not.
     NSPredicate *predicateToRun = nil;
     if (self.searchContent) {
         // In the example below, we create a predicate with a given format string that simply replaces %@ with the string that is to be searched for. By using "like", the query will end up doing a regular expression search similar to *foo* when you are searching for the word "foo". By using the [c], the NSCaseInsensitivePredicateOption will be set in the created predicate. The particular item type to search for, kMDItemTextContent, is described in MDItem.h.
-        NSString *predicateFormat = @"kMDItemFSName contains[c] %@";
-        predicateToRun = [NSPredicate predicateWithFormat:predicateFormat, self.searchKey];
+        NSString *predicateFormat = @"%k contains[c] %@";
+        predicateToRun = [NSPredicate predicateWithFormat:predicateFormat,searchByKey, self.searchKey];
     }
     
     // Create a compound predicate that searches for any keypath which has a value like the search key. This broadens the search results to include things such as the author, title, and other attributes not including the content. This is done in code for two reasons: 1. The predicate parser does not yet support "* = Foo" type of parsing, and 2. It is an example of creating a predicate in code, which is much "safer" than using a search string.
+    NSPredicateOperatorType type = NSContainsPredicateOperatorType;
+    if (searchKey.length <= 2) {
+            type = NSBeginsWithPredicateOperatorType;
+        }
     NSUInteger options = (NSCaseInsensitivePredicateOption|NSDiacriticInsensitivePredicateOption);
     NSPredicate *compPred = [NSComparisonPredicate
-                             predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"kMDItemFSName"]
+                             predicateWithLeftExpression:[NSExpression expressionForKeyPath:searchByKey]
                              rightExpression:[NSExpression expressionForConstantValue:self.searchKey]
                              modifier:NSDirectPredicateModifier
-                             type:NSContainsPredicateOperatorType
+                             type:type
                              options:options];
 //    NSPredicate *compPred = [NSComparisonPredicate
 //                             predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"*"]
@@ -235,6 +245,13 @@
     
     [self.query setSearchScopes:values];
 }
+
+- (void)setSearchByKey:(NSString *) key{
+//    [self.query stopQuery];
+    searchByKey = key;
+    [self createSearchPredicate];
+}
+
 
 
 - (void)setGroupByKey:(NSString *) key {

@@ -744,6 +744,9 @@
                                                 </items>
                                             </menu>
                                         </popUpButtonCell>
+                                        <connections>
+                                            <action selector="searchByDidChanged:" target="B8D-0N-5wS" id="10Q-W8-6kd"/>
+                                        </connections>
                                     </popUpButton>
                                 </toolbarItem>
                             </allowedToolbarItems>
@@ -763,6 +766,7 @@
                     <connections>
                         <outlet property="arrangeButton" destination="8vf-zL-6Zy" id="Z99-uW-4cq"/>
                         <outlet property="arrangeBy" destination="RXr-a5-nBo" id="JMt-Kl-rnk"/>
+                        <outlet property="searchBYButton" destination="XBN-FU-LfU" id="D0s-Fj-wSW"/>
                         <outlet property="searchFiled" destination="b14-93-y9L" id="hax-wO-GTg"/>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
                     </connections>

@@ -35,6 +35,8 @@ typedef void(^QueryResultChange)(NSMetadataQueryChangeType changeType);
 
 - (void)setGroupByKey:(NSString *) key;
 
+- (void)setSearchByKey:(NSString *) key;
+
 //@property BOOL searchContent;
 - (void)setSearchContent:(BOOL)value;
 

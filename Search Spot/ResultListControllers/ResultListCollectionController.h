@@ -16,4 +16,6 @@
 
 -(void)searchStartForKeyword:(NSString *)keyword;
 
+- (void)setSearchByKey:(NSString *) key;
+
 @end

@@ -11,12 +11,15 @@
 @interface SearchWindowController ()<NSSearchFieldDelegate>
 {
     NSMenuItem *lastSelectedItem;
+    NSMenuItem *lastSelectedSearchByItem;
 }
 @property (nonatomic,assign) IBOutlet NSMenu *arrangeBy;
 
 @property (nonatomic,assign) IBOutlet NSSearchField *searchFiled;
 
 @property (nonatomic,assign) IBOutlet NSPopUpButton *arrangeButton;
+
+@property (nonatomic,assign) IBOutlet NSPopUpButton *searchBYButton;
 
 @end
 
@@ -30,6 +33,12 @@
     NSMenuItem *item = [_arrangeBy itemAtIndex:2];
     [_arrangeButton selectItem: item];
     [self seectionDidChanged:_arrangeButton];
+    //kMDItemFSName kMDItemDisplayName  kMDItemKind kMDItemCreator kMDItemTextContent kMDItemPublishers kMDItemOrganizations
+    NSArray<NSString *> *searchByOptions = @[@"SearchBy:File Name",@"SearchBy:Display Name",@"SearchBy:Type",@"SearchBy:Application Type",@"SearchBy:Text Content",@"SearchBy:Publisher",@"SearchBy:Organization"];
+    [_searchBYButton removeAllItems];
+    [_searchBYButton addItemsWithTitles:searchByOptions];
+    [_searchBYButton selectItemAtIndex:0];
+    [self searchByDidChanged:_searchBYButton];
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
@@ -105,6 +114,62 @@
 //    [sender.menu selectItemAtIndex:selectedArrange];
 }
 
+-(IBAction)searchByDidChanged:(NSPopUpButton *)sender{
+    //kMDItemFSName kMDItemDisplayName  kMDItemKind kMDItemCreator kMDItemTextContent kMDItemPublishers kMDItemOrganizations
+    CFStringRef groupString = kMDItemFSName;
+    NSLog(@"SELECTED:%ld",(long)sender.indexOfSelectedItem);
+    
+    switch (sender.indexOfSelectedItem) {
+        case 0:
+        {
+            groupString = kMDItemFSName;
+        }
+            break;
+        case 1:
+        {
+            groupString = kMDItemDisplayName;
+            
+        }
+            break;
+        case 2:
+        {
+            groupString = kMDItemKind;
+            
+        }
+            break;
+        case 3:
+        {
+            groupString = kMDItemCreator;
+            
+        }
+            break;
+        case 4:
+        {
+            groupString = kMDItemTextContent;
+        }
+            break;
+        case 5:
+        {
+            groupString = kMDItemRights;
+            
+        }
+            break;
+        case 6:
+        {
+            groupString = kMDItemOrganizations;
+            
+        }
+            break;
+        default:
+            break;
+    }
+    NSMenuItem *selected = sender.selectedItem;
+    [selected setState:NSOnState];
+    [lastSelectedSearchByItem setState:NSOffState];
+    lastSelectedSearchByItem = selected;
+    [_listController setSearchByKey:(__bridge NSString *)(groupString)];
+    
+}
 
 
 - (void)searchFieldDidStartSearching:(NSSearchField *)sender {
