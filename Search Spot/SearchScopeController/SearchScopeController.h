@@ -19,6 +19,9 @@
 
 @property (weak) IBOutlet NSButton *application;
 
+@property (weak) IBOutlet NSStackView *containerView;
+
+
 @property (weak) IBOutlet ResultListCollectionController *listController;
 
 @end

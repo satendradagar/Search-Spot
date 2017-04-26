@@ -11,15 +11,45 @@
 
 @interface SearchScopeController ()
 {
-    __weak NSButton *lastSelected;
+     NSButton *lastSelected;
     
 }
 @end
 
 @implementation SearchScopeController
+/*
+ <buttonCell key="cell" type="recessed" title="Recessed" bezelStyle="recessed" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZbB-0U-x5N">
+ <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+ <font key="font" metaFont="systemBold" size="12"/>
+ </buttonCell>
 
+ */
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSArray *volumes = [[NSFileManager defaultManager] mountedVolumeURLsIncludingResourceValuesForKeys:nil options:NSVolumeEnumerationSkipHiddenVolumes];
+    for (NSURL *vol in volumes) {
+        
+        NSString *pathName = [vol lastPathComponent];
+        if ([pathName isEqualToString:@"/"]) {
+            continue;
+        }
+        
+        NSButton *newBtn = [[NSButton alloc] initWithFrame:_application.bounds];
+
+        [newBtn setTitle:[vol lastPathComponent]];
+        [newBtn sizeToFit];
+        [newBtn setAction:@selector(seectionDidChanged:)];
+        [newBtn setTarget:self];
+        [newBtn setFont:[NSFont boldSystemFontOfSize:12.0]];
+        [_containerView addArrangedSubview:newBtn];
+        newBtn.bezelStyle = 13;
+        [newBtn setButtonType:NSButtonTypePushOnPushOff];
+        [newBtn setAllowsMixedState:NO];
+        [newBtn setBordered:YES];
+        [newBtn setState:NSOffState];
+        [newBtn setShowsBorderOnlyWhileMouseInside:YES];
+    }
+    NSLog(@"%@",volumes);
     // Do view setup here.
 }
 
@@ -28,21 +58,6 @@
     [self seectionDidChanged:_home];
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 -(IBAction)seectionDidChanged:(NSButton *)sender{
     
@@ -99,7 +114,12 @@
         }
             break;
  
-        default:
+        default:{
+//            NSFileManager *fileManager = [NSFileManager defaultManager];
+            location = [NSString stringWithFormat:@"/Volumes/%@",sender.title];
+            locations = @[location];
+
+        }
             break;
     }
     [_listController searchScopeForLocation:locations];

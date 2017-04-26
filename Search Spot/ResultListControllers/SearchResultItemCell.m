@@ -60,8 +60,11 @@
 
 
 - (void)mouseDown:(NSEvent *)theEvent {
-    NSLog(@"entered mouseDown");
+    NSLog(@"entered mouseDown, %ld",(long)theEvent.clickCount);
     [super mouseDown:theEvent];
+    if (2 == theEvent.clickCount) {
+        [self openFile:nil];
+    }
  
 }
 //
