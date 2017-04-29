@@ -15,6 +15,7 @@
     NSString *searchKey;
     NSString *groupKey;
     NSString *searchByKey;
+    NSArray *searchByKeys;
     BOOL searchContent;
 
 }
@@ -41,7 +42,7 @@
         self.searchKey = @"";
         
         searchByKey = (NSString *)kMDItemFSName;//Default search by File system name
-        
+        searchByKeys = @[searchByKey];
         self.query = [[NSMetadataQuery alloc] init] ;
         // To watch results send by the query, add an observer to the NSNotificationCenter
         NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
@@ -86,7 +87,6 @@
         NSLog(@"Progressing...");
     } else if ([[note name] isEqualToString:NSMetadataQueryDidUpdateNotification]) {
         updateType =QueryDidUpdateGathering;
-
         // An update will happen when Spotlight notices that a file as added, removed, or modified that affected the search results.
         NSLog(@"An update happened.");
     }
@@ -176,12 +176,33 @@
             type = NSBeginsWithPredicateOperatorType;
         }
     NSUInteger options = (NSCaseInsensitivePredicateOption|NSDiacriticInsensitivePredicateOption);
-    NSPredicate *compPred = [NSComparisonPredicate
-                             predicateWithLeftExpression:[NSExpression expressionForKeyPath:searchByKey]
-                             rightExpression:[NSExpression expressionForConstantValue:self.searchKey]
-                             modifier:NSDirectPredicateModifier
-                             type:type
-                             options:options];
+
+    NSMutableArray *predicates = [NSMutableArray new];
+    for (NSString *key in searchByKeys) {
+        
+        NSPredicate *comparisionPred = [NSComparisonPredicate
+                                 predicateWithLeftExpression:[NSExpression expressionForKeyPath:key]
+                                 rightExpression:[NSExpression expressionForConstantValue:self.searchKey]
+                                 modifier:NSDirectPredicateModifier
+                                 type:type
+                                 options:options];
+        [predicates addObject:comparisionPred];
+   
+    }
+    NSPredicate *compPred = nil;
+
+    if (predicates.count == 1) {
+        compPred = predicates.firstObject;
+    }
+    else{
+            compPred = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
+    }
+//    NSPredicate *compPred = [NSComparisonPredicate
+//                             predicateWithLeftExpression:[NSExpression expressionForKeyPath:searchByKey]
+//                             rightExpression:[NSExpression expressionForConstantValue:self.searchKey]
+//                             modifier:NSDirectPredicateModifier
+//                             type:type
+//                             options:options];
 //    NSPredicate *compPred = [NSComparisonPredicate
 //                             predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"*"]
 //                             rightExpression:[NSExpression expressionForConstantValue:self.searchKey]
@@ -249,6 +270,13 @@
 - (void)setSearchByKey:(NSString *) key{
 //    [self.query stopQuery];
     searchByKey = key;
+    searchByKeys = @[searchByKey];
+    [self createSearchPredicate];
+}
+
+- (void)setSearchByKeys:(NSArray *) keys{
+    //    [self.query stopQuery];
+    searchByKeys = keys;
     [self createSearchPredicate];
 }
 

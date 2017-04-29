@@ -9,9 +9,30 @@
 #import "SearchScopeController.h"
 #import "NSFileManager+UnhiddenDirectories.h"
 
+@interface CustomURLs : NSObject
+
+@property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSURL *path;
+
+@end
+
+@implementation CustomURLs
+
+-(instancetype)initWithUrl:(NSURL *)url{
+    self = [super init];
+    if (self) {
+        self.title = [url lastPathComponent];
+        self.path = url;
+    }
+    return self;
+}
+
+@end
+
 @interface SearchScopeController ()
 {
-     NSButton *lastSelected;
+    NSButton *lastSelected;
+    NSMutableArray *cutomUrls;
     
 }
 @end
@@ -26,31 +47,47 @@
  */
 - (void)viewDidLoad {
     [super viewDidLoad];
+    cutomUrls = [NSMutableArray new];
     NSArray *volumes = [[NSFileManager defaultManager] mountedVolumeURLsIncludingResourceValuesForKeys:nil options:NSVolumeEnumerationSkipHiddenVolumes];
     for (NSURL *vol in volumes) {
         
-        NSString *pathName = [vol lastPathComponent];
-        if ([pathName isEqualToString:@"/"]) {
-            continue;
-        }
+        [self addButtonWithUrl:vol];
         
-        NSButton *newBtn = [[NSButton alloc] initWithFrame:_application.bounds];
-
-        [newBtn setTitle:[vol lastPathComponent]];
-        [newBtn sizeToFit];
-        [newBtn setAction:@selector(seectionDidChanged:)];
-        [newBtn setTarget:self];
-        [newBtn setFont:[NSFont boldSystemFontOfSize:12.0]];
-        [_containerView addArrangedSubview:newBtn];
-        newBtn.bezelStyle = 13;
-        [newBtn setButtonType:NSButtonTypePushOnPushOff];
-        [newBtn setAllowsMixedState:NO];
-        [newBtn setBordered:YES];
-        [newBtn setState:NSOffState];
-        [newBtn setShowsBorderOnlyWhileMouseInside:YES];
     }
     NSLog(@"%@",volumes);
     // Do view setup here.
+}
+
+-(void)addButtonWithUrl:(NSURL *)vol{
+    
+    CustomURLs *url = [[CustomURLs alloc] initWithUrl:vol];
+    if ([url.title isEqualToString:@"/"]) {
+        return;
+    }
+
+    for (CustomURLs *itr in cutomUrls) {
+        if ([itr.path.path isEqualToString:vol.path]) {
+            return;//Find existing match
+        }
+    }
+    
+    NSButton *newBtn = [[NSButton alloc] initWithFrame:_application.bounds];
+    
+    [newBtn setTitle:url.title];
+    [newBtn sizeToFit];
+    [newBtn setAction:@selector(seectionDidChanged:)];
+    [newBtn setTarget:self];
+    [newBtn setFont:[NSFont boldSystemFontOfSize:12.0]];
+    [_containerView addArrangedSubview:newBtn];
+    newBtn.bezelStyle = 13;
+    [newBtn setButtonType:NSButtonTypePushOnPushOff];
+    [newBtn setAllowsMixedState:NO];
+    [newBtn setBordered:YES];
+    [newBtn setState:NSOffState];
+    [newBtn setShowsBorderOnlyWhileMouseInside:YES];
+    [cutomUrls addObject:url];
+    [newBtn setTag:4+cutomUrls.count];
+  
 }
 
 -(void)viewDidAppear{
@@ -66,12 +103,12 @@
     lastSelected = sender;
     NSArray *locations = nil;
     NSString *location = NSMetadataQueryUserHomeScope;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
     switch (sender.tag) {
         case 1:
         {
             location = NSMetadataQueryLocalComputerScope;
-            
-            NSFileManager *fileManager = [NSFileManager defaultManager];
             
             locations = [fileManager directoriesAtPath:NSOpenStepRootDirectory()];
             // theArray at this point contains all the filenames
@@ -84,8 +121,6 @@
         {
             location = NSMetadataQueryUserHomeScope;
 
-            NSFileManager *fileManager = [NSFileManager defaultManager];
-            
             locations = [fileManager directoriesAtPath:NSHomeDirectory()];
             // theArray at this point contains all the filenames
             NSLog(@"%@",locations);
@@ -107,21 +142,35 @@
             locations = @[location];
         }
             break;
-
-        case 5:
-        {
-            
-        }
-            break;
  
         default:{
-//            NSFileManager *fileManager = [NSFileManager defaultManager];
-            location = [NSString stringWithFormat:@"/Volumes/%@",sender.title];
-            locations = @[location];
+            NSLog(@"sender.tag: %ld",(long)sender.tag);
+            if (cutomUrls.count >= sender.tag - 4) {
+                CustomURLs *url = [cutomUrls objectAtIndex:sender.tag - 5];
+                locations = @[url.path];
+                
+            }
 
         }
             break;
     }
     [_listController searchScopeForLocation:locations];
 }
+
+-(IBAction)didClickChooseFile:(id)sender{
+    
+    NSOpenPanel* openDlg = [NSOpenPanel openPanel];
+    
+    [openDlg setPrompt:@"Add to Search List"];
+    [openDlg setCanChooseFiles:NO];
+    [openDlg setCanChooseDirectories:YES];
+    [openDlg setDirectoryURL:[NSURL fileURLWithPath:@"/Volumes/"]];
+    [openDlg beginWithCompletionHandler:^(NSInteger result){
+        
+        if (result == NSModalResponseOK) {
+            [self addButtonWithUrl:openDlg.URL];
+        }
+    }];
+}
+
 @end

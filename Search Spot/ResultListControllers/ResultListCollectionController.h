@@ -18,4 +18,6 @@
 
 - (void)setSearchByKey:(NSString *) key;
 
+- (void)setSearchByKeys:(NSArray *) keys;
+
 @end

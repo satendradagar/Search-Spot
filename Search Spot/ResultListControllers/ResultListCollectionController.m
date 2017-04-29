@@ -131,7 +131,10 @@
                 
             case QueryDidUpdateGathering:
             {
+                [weakSelf.queryManager.query disableUpdates];
                 [weakSelf refreshViewWithNewItemData];
+                [weakSelf.queryManager.query enableUpdates];
+
             }
                 break;
                 
@@ -144,6 +147,7 @@
 
 -(void)searchStartForKeyword:(NSString *)keyword{
 
+    [queryManager.query enableUpdates];
     [queryManager setSearchKey:keyword];
     
 }
@@ -164,6 +168,12 @@
 - (void)setSearchByKey:(NSString *) key{
 
     [queryManager setSearchByKey:key];
+}
+
+- (void)setSearchByKeys:(NSArray *) keys{
+    
+    [queryManager setSearchByKeys:keys];
+    
 }
 
 -(void) refreshViewWithNewItemData{

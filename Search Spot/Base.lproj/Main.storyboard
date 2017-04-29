@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12118"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
@@ -734,12 +734,12 @@
                                     <popUpButton key="view" verticalHuggingPriority="750" id="XBN-FU-LfU">
                                         <rect key="frame" x="0.0" y="14" width="150" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="roundTextured" title="Search By: Name" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="5IT-h9-fIP" id="85L-2N-eLh">
+                                        <popUpButtonCell key="cell" type="roundTextured" title="Search By: Name" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" autoenablesItems="NO" altersStateOfSelectedItem="NO" selectedItem="5IT-h9-fIP" id="85L-2N-eLh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
-                                            <menu key="menu" id="c4A-Ar-u1X">
+                                            <menu key="menu" autoenablesItems="NO" id="c4A-Ar-u1X">
                                                 <items>
-                                                    <menuItem title="Search By: Name" state="on" id="5IT-h9-fIP"/>
+                                                    <menuItem title="Search By: Name" id="5IT-h9-fIP"/>
                                                     <menuItem title="Search By: " id="H17-cz-gj7"/>
                                                     <menuItem title="Item 3" id="NY0-9b-Wmg"/>
                                                 </items>
@@ -774,7 +774,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-76" y="-205"/>
+            <point key="canvasLocation" x="-148" y="-481"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="26w-ND-U5h">
@@ -973,10 +973,26 @@
                                                 <real value="3.4028234663852886e+38"/>
                                             </customSpacing>
                                         </stackView>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="x9V-qi-DXx">
+                                            <rect key="frame" x="700" y="6" width="22" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="22" id="spe-sp-KLT"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wo4-p2-L5h">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="didClickChooseFile:" target="YUz-Ra-sFg" id="I6J-WS-sPb"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="x9V-qi-DXx" firstAttribute="top" secondItem="vEt-U6-bCE" secondAttribute="top" constant="6" id="0X4-0w-fbf"/>
                                         <constraint firstItem="UkB-Bu-jQv" firstAttribute="leading" secondItem="vEt-U6-bCE" secondAttribute="leading" constant="20" id="2J4-4w-B4w"/>
+                                        <constraint firstAttribute="trailing" secondItem="x9V-qi-DXx" secondAttribute="trailing" constant="6" id="7Ye-ol-hyS"/>
                                         <constraint firstAttribute="bottom" secondItem="UkB-Bu-jQv" secondAttribute="bottom" constant="7" id="Wyq-98-TIR"/>
+                                        <constraint firstAttribute="bottom" secondItem="x9V-qi-DXx" secondAttribute="bottom" constant="7" id="csx-xY-KeH"/>
                                         <constraint firstItem="UkB-Bu-jQv" firstAttribute="top" secondItem="vEt-U6-bCE" secondAttribute="top" constant="8" id="dGe-HQ-4V3"/>
                                     </constraints>
                                 </view>
@@ -1034,7 +1050,7 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="ehw-Jz-CpO" userLabel="Item Preview">
-                                                <rect key="frame" x="0.0" y="183.5" width="347" height="240"/>
+                                                <rect key="frame" x="0.0" y="183.5" width="347" height="240.5"/>
                                             </customView>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="z4i-mv-N3b" userLabel="MetaInfo">
                                                 <rect key="frame" x="0.0" y="0.0" width="347" height="185"/>
@@ -1290,11 +1306,12 @@
                 </customObject>
                 <userDefaultsController representsSharedInstance="YES" id="kLD-zz-zib"/>
             </objects>
-            <point key="canvasLocation" x="226" y="959.5"/>
+            <point key="canvasLocation" x="181" y="883"/>
         </scene>
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSAdvanced" width="32" height="32"/>
     </resources>
 </document>
