@@ -36,7 +36,7 @@
     [_arrangeButton selectItem: item];
     [self seectionDidChanged:_arrangeButton];
     //kMDItemFSName kMDItemDisplayName  kMDItemKind kMDItemCreator kMDItemTextContent kMDItemPublishers kMDItemOrganizations
-    NSArray<NSString *> *searchByOptions = @[@"SearchBy:File Name",@"SearchBy:Display Name",@"SearchBy:Type",@"SearchBy:Application Type",@"SearchBy:Text Content",@"SearchBy:Publisher",@"SearchBy:Organization"];
+    NSArray<NSString *> *searchByOptions = @[@"SearchBy:Tag",@"SearchBy:File Name",@"SearchBy:Display Name",@"SearchBy:Type",@"SearchBy:Application Type",@"SearchBy:Text Content",@"SearchBy:Publisher",@"SearchBy:Organization"];
     [_searchBYButton removeAllItems];
     [_searchBYButton addItemsWithTitles:searchByOptions];
     for (NSMenuItem *item in _searchBYButton.menu.itemArray) {
@@ -73,6 +73,7 @@
     NSLog(@"SELECTED:%ld",(long)sender.indexOfSelectedItem);
 
     switch (sender.indexOfSelectedItem) {
+            
         case 1:
         {
              groupString = kMDItemKind;
@@ -127,39 +128,45 @@
     switch (sender.indexOfSelectedItem) {
         case 0:
         {
+            groupString = (CFStringRef )@"kMDItemUserTags";
+        }
+            break;
+
+        case 1:
+        {
             groupString = kMDItemFSName;
         }
             break;
-        case 1:
+        case 2:
         {
             groupString = kMDItemDisplayName;
             
         }
             break;
-        case 2:
+        case 3:
         {
             groupString = kMDItemKind;
             
         }
             break;
-        case 3:
+        case 4:
         {
             groupString = kMDItemCreator;
             
         }
             break;
-        case 4:
+        case 5:
         {
             groupString = kMDItemTextContent;
         }
             break;
-        case 5:
+        case 6:
         {
             groupString = kMDItemRights;
             
         }
             break;
-        case 6:
+        case 7:
         {
             groupString = kMDItemOrganizations;
             
@@ -177,6 +184,11 @@
         [selected setState:NSOnState];
         [searchByKeys addObject:(__bridge id _Nonnull)(groupString)];
 
+    }
+    
+    if (searchByKeys.count==0) {
+        
+        [searchByKeys addObject:@"kMDItemUserTags"];
     }
 //    [lastSelectedSearchByItem setState:NSOffState];
 //    lastSelectedSearchByItem = selected;

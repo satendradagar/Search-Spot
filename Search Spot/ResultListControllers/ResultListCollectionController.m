@@ -190,6 +190,7 @@
     if (queryManager.query.results.count) {
         NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:0];
         [self collectionView:_resultsList didSelectItemsAtIndexPaths:[NSSet setWithObject:path]];
+        [self.resultsList selectItemsAtIndexPaths:[NSSet setWithObject:path] scrollPosition:NSCollectionViewScrollPositionTop];
         self.bottomMessageFiled.stringValue = [NSString stringWithFormat:@"Showing results for %lu items in %lu  Categories", [self queryManager].query.results.count,[self queryManager].query.groupedResults.count];
 
     }
@@ -263,6 +264,7 @@
 }
 
 - (NSSize)collectionView:(NSCollectionView *)collectionView layout:(NSCollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+   
     return NSMakeSize(collectionView.bounds.size.width, 20);
 
 }

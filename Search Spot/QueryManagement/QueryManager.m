@@ -49,7 +49,10 @@
         [nf addObserver:self selector:@selector(queryNote:) name:nil object:self.query];
         
         // We want the items in the query to automatically be sorted by the file system name; this way, we don't have to do any special sorting
-        [self.query setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] ]];
+//        [self.query setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:(id)kMDItemDisplayName ascending:YES] ]];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:(id)kMDItemDisplayName
+                                                                       ascending:YES selector:@selector(caseInsensitiveCompare:)];
+        [self.query setSortDescriptors:@[sortDescriptor]];
         // For the groups, we want the first grouping by the kind, and the second by the file size.
         [self.query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemCreator, nil]];
         [self.query setDelegate:self];
@@ -157,9 +160,9 @@
 
 - (void)createSearchPredicate {
     
-    if (0 == searchKey.length || 0 == searchByKey.length) {
-        return;//Skip intitally for wildcard search
-    }
+//    if (0 == searchKey.length || 0 == searchByKey.length) {
+//        return;//Skip intitally for wildcard search
+//    }
     // This demonstrates a few ways to create a search predicate.
     
     // The user can set the checkbox to include this in the search result, or not.
@@ -258,13 +261,17 @@
 - (void)setSearchKey:(NSString *) value {
     if (searchKey != value) {
         searchKey = [value copy];
+        [query stopQuery];
+
         [self createSearchPredicate];
     }
 }
 
 - (void)setScopePath:(NSArray *) values{
-    
+    [query stopQuery];
     [self.query setSearchScopes:values];
+    [query startQuery];
+
 }
 
 - (void)setSearchByKey:(NSString *) key{
@@ -276,10 +283,10 @@
 
 - (void)setSearchByKeys:(NSArray *) keys{
     //    [self.query stopQuery];
+    [query stopQuery];
     searchByKeys = keys;
     [self createSearchPredicate];
 }
-
 
 
 - (void)setGroupByKey:(NSString *) key {
