@@ -14,25 +14,29 @@
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
-                            <menuItem title="Search Spot" id="1Xt-HY-uBw">
+                            <menuItem title="Dissemino Seek" id="1Xt-HY-uBw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Search Spot" systemMenu="apple" id="uQy-DD-JDr">
+                                <menu key="submenu" title="Dissemino Seek" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About Search Spot" id="5kV-Vb-QxS">
+                                        <menuItem title="About Dissemino Seek" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <action selector="showPreferences:" target="Ady-hI-5gd" id="Z9A-HF-xYu"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                                        <menuItem title="Hide Search Spot" keyEquivalent="h" id="Olw-nP-bQN">
+                                        <menuItem title="Hide Dissemino Seek" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
                                                 <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
                                             </connections>
@@ -50,7 +54,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit Search Spot" keyEquivalent="q" id="4sb-4s-VLi">
+                                        <menuItem title="Quit Dissemino Seek" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
@@ -643,7 +647,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
-                                        <menuItem title="Search Spot Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                                        <menuItem title="Dissemino Seek Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
                                                 <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
                                             </connections>
@@ -660,13 +664,13 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-222" y="-188"/>
+            <point key="canvasLocation" x="-349" y="-23"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" customClass="SearchWindowController" sceneMemberID="viewController">
-                    <window key="window" title="Search Spot" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="Dissemino Seek" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="724" height="525"/>
@@ -690,13 +694,14 @@
                                     <popUpButton key="view" id="8vf-zL-6Zy">
                                         <rect key="frame" x="13" y="14" width="50" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" refusesFirstResponder="YES" borderStyle="borderAndBezel" inset="2" pullsDown="YES" selectedItem="z4H-QE-WBb" id="SM0-3x-apY">
+                                        <popUpButtonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" refusesFirstResponder="YES" borderStyle="borderAndBezel" inset="2" pullsDown="YES" id="SM0-3x-apY">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
                                             <menu key="menu" title="OtherViews" id="RXr-a5-nBo">
                                                 <items>
                                                     <menuItem image="NSActionTemplate" hidden="YES" id="RIH-3m-sHH"/>
-                                                    <menuItem title="Kind" id="z4H-QE-WBb"/>
+                                                    <menuItem title="None" tag="6" id="z4H-QE-WBb"/>
+                                                    <menuItem title="Kind" id="UbW-6t-SQC"/>
                                                     <menuItem title="Application" tag="1" id="F4g-rf-Hmd"/>
                                                     <menuItem title="Date Created" tag="2" id="Gk8-Vu-nav"/>
                                                     <menuItem title="Date Modified" tag="3" id="2Qw-wS-D8t"/>
@@ -750,14 +755,61 @@
                                         </connections>
                                     </popUpButton>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="843104DA-C549-4066-A915-6CD2198C6B70" label="Custom View" paletteLabel="Custom View" id="v0O-WK-mev">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="82" height="19"/>
+                                    <size key="maxSize" width="82" height="19"/>
+                                    <button key="view" verticalHuggingPriority="750" id="6iR-P3-qp8">
+                                        <rect key="frame" x="0.0" y="14" width="82" height="19"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundRect" title="Play" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="goG-Eo-vo3">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="cellTitle"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="stopQueryPreseed:" target="B8D-0N-5wS" id="Q30-MG-H4k"/>
+                                            <binding destination="B8D-0N-5wS" name="hidden" keyPath="self.listController.queryManager.query.isRunning" id="xez-UB-ddw">
+                                                <dictionary key="options">
+                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                </dictionary>
+                                            </binding>
+                                            <binding destination="B8D-0N-5wS" name="title" keyPath="self.listController.queryManager.query.isRunning" id="BgZ-PI-GmG">
+                                                <dictionary key="options">
+                                                    <string key="NSValueTransformerName">IsRunningTransformer</string>
+                                                </dictionary>
+                                            </binding>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="6CBA8E6E-B113-4290-ACC9-A3EF59872B51" label="Custom View" paletteLabel="Custom View" id="W7B-6W-i0u">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="67" height="28"/>
+                                    <size key="maxSize" width="180" height="28"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="FG7-Ah-IzK">
+                                        <rect key="frame" x="0.0" y="14" width="180" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="Xgf-Gs-YKm">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="sort as A-Z" selected="YES"/>
+                                                <segment label="sort as Z-A" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="sortAscDescChanged:" target="B8D-0N-5wS" id="vIO-kc-CaO"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="nx8-E3-jWy"/>
-                                <toolbarItem reference="nx8-E3-jWy"/>
                                 <toolbarItem reference="zzy-IQ-gd9"/>
+                                <toolbarItem reference="W7B-6W-i0u"/>
+                                <toolbarItem reference="nx8-E3-jWy"/>
                                 <toolbarItem reference="nx8-E3-jWy"/>
                                 <toolbarItem reference="Dcl-Z2-DWM"/>
                                 <toolbarItem reference="gYU-RZ-O8U"/>
+                                <toolbarItem reference="v0O-WK-mev"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -774,7 +826,192 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-148" y="-481"/>
+            <point key="canvasLocation" x="-183" y="-609"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="FXy-eY-KB0">
+            <objects>
+                <windowController storyboardIdentifier="prefWindowController" id="aLO-r4-vQY" customClass="PreferencesWindowController" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="oOQ-Pc-A8k">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                    </window>
+                    <connections>
+                        <segue destination="oCg-AV-Rlh" kind="relationship" relationship="window.shadowedContentViewController" id="sRV-Tj-83U"/>
+                    </connections>
+                </windowController>
+                <customObject id="EBx-iU-NWu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-912" y="467"/>
+        </scene>
+        <!--Preferences Controller-->
+        <scene sceneID="uoY-gT-PUu">
+            <objects>
+                <viewController id="oCg-AV-Rlh" customClass="PreferencesController" sceneMemberID="viewController">
+                    <view key="view" id="95c-GR-8in">
+                        <rect key="frame" x="0.0" y="0.0" width="516" height="375"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <tabView translatesAutoresizingMaskIntoConstraints="NO" id="fvH-MN-g4e">
+                                <rect key="frame" x="-8" y="-10" width="532" height="391"/>
+                                <font key="font" metaFont="system"/>
+                                <tabViewItems>
+                                    <tabViewItem label="Search Scopes" identifier="1" id="h2b-8r-kaT">
+                                        <view key="view" id="q8j-0m-ZuA">
+                                            <rect key="frame" x="10" y="33" width="512" height="345"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVK-QT-dvn">
+                                                    <rect key="frame" x="17" y="33" width="478" height="309"/>
+                                                    <clipView key="contentView" id="UB2-Zh-HJ7">
+                                                        <rect key="frame" x="1" y="0.0" width="476" height="308"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" headerView="fRB-QX-6BV" id="3MP-6S-1G7">
+                                                                <rect key="frame" x="0.0" y="0.0" width="476" height="285"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <size key="intercellSpacing" width="3" height="2"/>
+                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                                                <tableColumns>
+                                                                    <tableColumn width="473" minWidth="40" maxWidth="1000" id="cBX-NN-QAe">
+                                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Custom search Scopes">
+                                                                            <font key="font" metaFont="smallSystem"/>
+                                                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                                        </tableHeaderCell>
+                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="5NR-s1-tby">
+                                                                            <font key="font" metaFont="system"/>
+                                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                            <connections>
+                                                                                <binding destination="iJv-Br-waD" name="value" keyPath="arrangedObjects.self.title" id="SyG-9Q-PMu"/>
+                                                                            </connections>
+                                                                        </textFieldCell>
+                                                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                                        <connections>
+                                                                            <binding destination="iJv-Br-waD" name="value" keyPath="arrangedObjects.self.title" id="tND-Nk-Eqo">
+                                                                                <dictionary key="options">
+                                                                                    <bool key="NSConditionallySetsEnabled" value="YES"/>
+                                                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                                                    <bool key="NSCreatesSortDescriptor" value="NO"/>
+                                                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                                                </dictionary>
+                                                                            </binding>
+                                                                        </connections>
+                                                                    </tableColumn>
+                                                                </tableColumns>
+                                                                <connections>
+                                                                    <binding destination="iJv-Br-waD" name="content" keyPath="arrangedObjects" id="HtX-zB-gDA"/>
+                                                                </connections>
+                                                            </tableView>
+                                                        </subviews>
+                                                    </clipView>
+                                                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="QEK-Tz-LdQ">
+                                                        <rect key="frame" x="1" y="292" width="456" height="16"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="JBf-ER-wEN">
+                                                        <rect key="frame" x="-15" y="23" width="16" height="0.0"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                    <tableHeaderView key="headerView" id="fRB-QX-6BV">
+                                                        <rect key="frame" x="0.0" y="0.0" width="476" height="23"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </tableHeaderView>
+                                                </scrollView>
+                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GOd-ok-BRH">
+                                                    <rect key="frame" x="474" y="5" width="21" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="19" id="jQD-Cq-Bce"/>
+                                                        <constraint firstAttribute="width" constant="21" id="sje-oB-YEt"/>
+                                                    </constraints>
+                                                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uMZ-gy-Tx5">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="addNewLocation:" target="oCg-AV-Rlh" id="oF2-1T-qva"/>
+                                                    </connections>
+                                                </button>
+                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pFd-QU-alK">
+                                                    <rect key="frame" x="442" y="5" width="21" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="19" id="2Fh-qG-252"/>
+                                                        <constraint firstAttribute="width" constant="21" id="6Jr-Ph-2bv"/>
+                                                    </constraints>
+                                                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BgL-GL-yBA">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="removeLocation:" target="oCg-AV-Rlh" id="C2X-6h-3wi"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="GOd-ok-BRH" firstAttribute="leading" secondItem="pFd-QU-alK" secondAttribute="trailing" constant="11" id="4YZ-VB-cHr"/>
+                                                <constraint firstAttribute="bottom" secondItem="bVK-QT-dvn" secondAttribute="bottom" constant="33" id="Nqm-18-g3s"/>
+                                                <constraint firstAttribute="trailing" secondItem="GOd-ok-BRH" secondAttribute="trailing" constant="17" id="RAo-pH-uqY"/>
+                                                <constraint firstAttribute="trailing" secondItem="bVK-QT-dvn" secondAttribute="trailing" constant="17" id="eDK-Oh-d85"/>
+                                                <constraint firstAttribute="bottom" secondItem="pFd-QU-alK" secondAttribute="bottom" constant="6" id="kaI-bq-sQP"/>
+                                                <constraint firstAttribute="bottom" secondItem="GOd-ok-BRH" secondAttribute="bottom" constant="6" id="qRS-iM-4Cc"/>
+                                                <constraint firstItem="bVK-QT-dvn" firstAttribute="top" secondItem="q8j-0m-ZuA" secondAttribute="top" constant="3" id="qbc-VA-Sq5"/>
+                                                <constraint firstItem="bVK-QT-dvn" firstAttribute="leading" secondItem="q8j-0m-ZuA" secondAttribute="leading" constant="17" id="uqQ-Dz-bio"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="General" identifier="2" id="aZG-B6-LRZ">
+                                        <view key="view" id="tJZ-Ck-C4z">
+                                            <rect key="frame" x="10" y="33" width="512" height="345"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JGb-x6-33y">
+                                                    <rect key="frame" x="15" y="293" width="482" height="28"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <buttonCell key="cell" type="check" title="Automatically mount/unmount disks" bezelStyle="regularSquare" imagePosition="left" inset="2" id="FSS-aM-CHw">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="autoMountButtonPressed:" target="oCg-AV-Rlh" id="cp0-zE-clS"/>
+                                                        <binding destination="zlV-fp-Mje" name="value" keyPath="values.isAutoMountEnabled" id="l5o-et-PSG"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                    </tabViewItem>
+                                </tabViewItems>
+                            </tabView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="fvH-MN-g4e" secondAttribute="bottom" id="29V-Uk-MaP"/>
+                            <constraint firstAttribute="trailing" secondItem="fvH-MN-g4e" secondAttribute="trailing" constant="-1" id="Bax-2s-D8B"/>
+                            <constraint firstItem="fvH-MN-g4e" firstAttribute="leading" secondItem="95c-GR-8in" secondAttribute="leading" constant="-1" id="Icf-GB-n9P"/>
+                            <constraint firstItem="fvH-MN-g4e" firstAttribute="top" secondItem="95c-GR-8in" secondAttribute="top" id="jdj-Wu-JJP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="arrayController" destination="iJv-Br-waD" id="hKs-Qu-Oof"/>
+                        <outlet property="table" destination="3MP-6S-1G7" id="nrL-HH-mQq"/>
+                    </connections>
+                </viewController>
+                <customObject id="GZ1-Zb-8RQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController automaticallyRearrangesObjects="YES" id="iJv-Br-waD">
+                    <connections>
+                        <binding destination="oCg-AV-Rlh" name="contentArray" keyPath="self.contentArray" id="krr-al-7lN">
+                            <dictionary key="options">
+                                <bool key="NSDeletesObjectsOnRemove" value="YES"/>
+                                <bool key="NSHandlesContentAsCompoundValue" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </arrayController>
+                <userDefaultsController id="zlV-fp-Mje"/>
+            </objects>
+            <point key="canvasLocation" x="-252" y="396.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="26w-ND-U5h">
@@ -1050,7 +1287,7 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="ehw-Jz-CpO" userLabel="Item Preview">
-                                                <rect key="frame" x="0.0" y="183.5" width="347" height="240.5"/>
+                                                <rect key="frame" x="0.0" y="183.5" width="347" height="240"/>
                                             </customView>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="z4i-mv-N3b" userLabel="MetaInfo">
                                                 <rect key="frame" x="0.0" y="0.0" width="347" height="185"/>
@@ -1282,6 +1519,7 @@
                         <outlet property="detailController" destination="NlB-BA-F1k" id="dgy-xg-P8N"/>
                         <outlet property="resultsList" destination="cR7-5S-nIn" id="0ZO-ms-0mZ"/>
                         <outlet property="rightPaneView" destination="BXk-4C-8ne" id="XuF-y4-bAR"/>
+                        <outlet property="scopeController" destination="YUz-Ra-sFg" id="1OI-nI-OFq"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1306,12 +1544,13 @@
                 </customObject>
                 <userDefaultsController representsSharedInstance="YES" id="kLD-zz-zib"/>
             </objects>
-            <point key="canvasLocation" x="181" y="883"/>
+            <point key="canvasLocation" x="51" y="-218"/>
         </scene>
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSAdvanced" width="32" height="32"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
 </document>

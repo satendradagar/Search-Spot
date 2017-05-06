@@ -24,9 +24,9 @@
     }
     NSInteger val = [value integerValue];
     if (val) {
-        return NSLocalizedString(@"Query is alive...", @"String to be shown when the query is alive and maintaining results");
+        return NSLocalizedString(@"Pause", @"String to be shown when the query is alive and maintaining results");
     } else {
-        return NSLocalizedString(@"Query is dead...", @"String to be shown when the query is not alive and not maintaining results");
+        return NSLocalizedString(@"Play", @"String to be shown when the query is not alive and not maintaining results");
     }
 }
 

@@ -8,13 +8,8 @@
 
 #import "SearchScopeController.h"
 #import "NSFileManager+UnhiddenDirectories.h"
-
-@interface CustomURLs : NSObject
-
-@property (nonatomic, retain) NSString *title;
-@property (nonatomic, retain) NSURL *path;
-
-@end
+#import "ContextualButton.h"
+#import "Constants.h"
 
 @implementation CustomURLs
 
@@ -32,7 +27,6 @@
 @interface SearchScopeController ()
 {
     NSButton *lastSelected;
-    NSMutableArray *cutomUrls;
     
 }
 @end
@@ -45,34 +39,58 @@
  </buttonCell>
 
  */
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    cutomUrls = [NSMutableArray new];
+    [self registerForDiskChange];
+    _cutomUrls = [NSMutableArray new];
     NSArray *volumes = [[NSFileManager defaultManager] mountedVolumeURLsIncludingResourceValuesForKeys:nil options:NSVolumeEnumerationSkipHiddenVolumes];
     for (NSURL *vol in volumes) {
         
         [self addButtonWithUrl:vol];
         
     }
+    
     NSLog(@"%@",volumes);
     // Do view setup here.
 }
 
--(void)addButtonWithUrl:(NSURL *)vol{
+-(void)dealloc{
     
-    CustomURLs *url = [[CustomURLs alloc] initWithUrl:vol];
+    [self unRegisterForDiskChange];
+    
+}
+
+-(void)registerForDiskChange{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAddChange:) name:ScopeChangeAddedNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRemveChange:) name:ScopeChangeRemovedNotification object:nil];
+
+}
+
+-(void)unRegisterForDiskChange{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)handleAddChange:(NSNotification *)not{
+    
+    CustomURLs *url = [not object];
     if ([url.title isEqualToString:@"/"]) {
         return;
     }
-
-    for (CustomURLs *itr in cutomUrls) {
-        if ([itr.path.path isEqualToString:vol.path]) {
+    
+    for (CustomURLs *itr in _cutomUrls) {
+        if ([itr.path.path isEqualToString:url.path.path]) {
             return;//Find existing match
         }
     }
     
-    NSButton *newBtn = [[NSButton alloc] initWithFrame:_application.bounds];
-    
+    ContextualButton *newBtn = [[ContextualButton alloc] initWithFrame:_application.bounds];
+    newBtn.urlObj = url;
+    newBtn.containerArr = _cutomUrls;
     [newBtn setTitle:url.title];
     [newBtn sizeToFit];
     [newBtn setAction:@selector(seectionDidChanged:)];
@@ -85,9 +103,34 @@
     [newBtn setBordered:YES];
     [newBtn setState:NSOffState];
     [newBtn setShowsBorderOnlyWhileMouseInside:YES];
-    [cutomUrls addObject:url];
-    [newBtn setTag:4+cutomUrls.count];
-  
+    [_cutomUrls addObject:url];
+    [newBtn setTag:4+_cutomUrls.count];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ScopeChangeRefreshNotification object:url];
+
+}
+
+-(void)handleRemveChange:(NSNotification *)not{
+
+    CustomURLs *url = [not object];
+    if (nil != url) {
+        NSUInteger selectedIndex =[_cutomUrls indexOfObject:url];
+        if (selectedIndex != NSNotFound) {
+            ContextualButton *removing = [_containerView.arrangedSubviews objectAtIndex:selectedIndex + 5];
+            if (removing.urlObj == url) {
+                [_containerView removeView:removing];
+                [_cutomUrls removeObject:url];
+                [[NSNotificationCenter defaultCenter] postNotificationName:ScopeChangeRefreshNotification object:url];
+
+            }
+        }
+    }
+}
+
+-(void)addButtonWithUrl:(NSURL *)vol{
+    
+    CustomURLs *url = [[CustomURLs alloc] initWithUrl:vol];
+    [self handleAddChange:[NSNotification notificationWithName:ScopeChangeAddedNotification object:url]];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:ScopeChangeAddedNotification object:url];
 }
 
 -(void)viewDidAppear{
@@ -145,8 +188,8 @@
  
         default:{
             NSLog(@"sender.tag: %ld",(long)sender.tag);
-            if (cutomUrls.count >= sender.tag - 4) {
-                CustomURLs *url = [cutomUrls objectAtIndex:sender.tag - 5];
+            if (_cutomUrls.count >= sender.tag - 4) {
+                CustomURLs *url = [_cutomUrls objectAtIndex:sender.tag - 5];
                 locations = @[url.path];
                 
             }

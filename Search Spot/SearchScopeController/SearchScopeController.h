@@ -21,7 +21,18 @@
 
 @property (weak) IBOutlet NSStackView *containerView;
 
+@property (nonatomic,retain) NSMutableArray *cutomUrls;
+
 
 @property (weak) IBOutlet ResultListCollectionController *listController;
+
+@end
+
+@interface CustomURLs : NSObject
+
+@property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSURL *path;
+
+-(instancetype)initWithUrl:(NSURL *)url;
 
 @end

@@ -26,6 +26,10 @@
 		84AF84CF1EA6766500C732BE /* SearchScopeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AF84CE1EA6766500C732BE /* SearchScopeController.m */; };
 		84AF84D21EA7469700C732BE /* NSFileManager+UnhiddenDirectories.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AF84D11EA7469700C732BE /* NSFileManager+UnhiddenDirectories.m */; };
 		84FC4CB41EA1B3B30076D14E /* SearchWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FC4CB31EA1B3B30076D14E /* SearchWindowController.m */; };
+		EA3FC7171EB8467200179FD1 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3FC7161EB8467200179FD1 /* PreferencesController.m */; };
+		EA3FC71B1EB8488200179FD1 /* ContextualButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3FC71A1EB8488200179FD1 /* ContextualButton.m */; };
+		EA5FDE471EB9F8E40040E94D /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5FDE461EB9F8E40040E94D /* PreferencesWindowController.m */; };
+		EAE3F77F1EBB341F00BA18FE /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE3F77E1EBB341F00BA18FE /* Constants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +40,7 @@
 		8415F5D01E935CA8004C7595 /* SearchResultItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultItemCell.xib; sourceTree = "<group>"; };
 		8415F5D31E93658D004C7595 /* ResultListFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultListFlowLayout.h; sourceTree = "<group>"; };
 		8415F5D41E93658D004C7595 /* ResultListFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultListFlowLayout.m; sourceTree = "<group>"; };
-		84181FF41E9223B100F420F0 /* Search Spot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Search Spot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84181FF41E9223B100F420F0 /* Dissemino Seek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dissemino Seek.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84181FF71E9223B100F420F0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "Search Spot/AppDelegate.h"; sourceTree = "<group>"; };
 		84181FF81E9223B100F420F0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = "Search Spot/AppDelegate.m"; sourceTree = "<group>"; };
 		84181FFB1E9223B100F420F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -64,6 +68,15 @@
 		84AF84D11EA7469700C732BE /* NSFileManager+UnhiddenDirectories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+UnhiddenDirectories.m"; path = "Search Spot/NSFileManager+UnhiddenDirectories.m"; sourceTree = "<group>"; };
 		84FC4CB21EA1B3B30076D14E /* SearchWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchWindowController.h; path = "Search Spot/SearchWindowController/SearchWindowController.h"; sourceTree = "<group>"; };
 		84FC4CB31EA1B3B30076D14E /* SearchWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchWindowController.m; path = "Search Spot/SearchWindowController/SearchWindowController.m"; sourceTree = "<group>"; };
+		EA3FC7151EB8467200179FD1 /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
+		EA3FC7161EB8467200179FD1 /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
+		EA3FC7191EB8488200179FD1 /* ContextualButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextualButton.h; sourceTree = "<group>"; };
+		EA3FC71A1EB8488200179FD1 /* ContextualButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextualButton.m; sourceTree = "<group>"; };
+		EA5FDE451EB9F8E40040E94D /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindowController.h; sourceTree = "<group>"; };
+		EA5FDE461EB9F8E40040E94D /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindowController.m; sourceTree = "<group>"; };
+		EA6CB86E1EB98FA300ED4315 /* Discussion.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Discussion.rtf; sourceTree = "<group>"; };
+		EAE3F77D1EBB341F00BA18FE /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		EAE3F77E1EBB341F00BA18FE /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +113,8 @@
 				84181FF61E9223B100F420F0 /* Search Spot */,
 				84181FF71E9223B100F420F0 /* AppDelegate.h */,
 				84181FF81E9223B100F420F0 /* AppDelegate.m */,
+				EAE3F77D1EBB341F00BA18FE /* Constants.h */,
+				EAE3F77E1EBB341F00BA18FE /* Constants.m */,
 				84FC4CB21EA1B3B30076D14E /* SearchWindowController.h */,
 				84FC4CB31EA1B3B30076D14E /* SearchWindowController.m */,
 				84181FFD1E9223B100F420F0 /* ViewController.h */,
@@ -113,7 +128,7 @@
 		84181FF51E9223B100F420F0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84181FF41E9223B100F420F0 /* Search Spot.app */,
+				84181FF41E9223B100F420F0 /* Dissemino Seek.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -121,6 +136,8 @@
 		84181FF61E9223B100F420F0 /* Search Spot */ = {
 			isa = PBXGroup;
 			children = (
+				EA3FC7181EB8485C00179FD1 /* CustomAppKitItems */,
+				EA04BD6D1EB793A80026FC37 /* PreferencesController */,
 				84AF84CC1EA6745700C732BE /* SearchScopeController */,
 				84A060AB1E92A53200BDB71F /* QueryManagement */,
 				842198E11E974C7100D2C358 /* ModelObjects */,
@@ -128,6 +145,7 @@
 				8415F5CA1E9353E7004C7595 /* ResultListControllers */,
 				842198E21E974C8100D2C358 /* UIandOtherResources */,
 				84181FFA1E9223B100F420F0 /* Supporting Files */,
+				EA6CB86E1EB98FA300ED4315 /* Discussion.rtf */,
 			);
 			path = "Search Spot";
 			sourceTree = "<group>";
@@ -191,12 +209,32 @@
 			path = "Search Spot/SearchScopeController";
 			sourceTree = SOURCE_ROOT;
 		};
+		EA04BD6D1EB793A80026FC37 /* PreferencesController */ = {
+			isa = PBXGroup;
+			children = (
+				EA3FC7151EB8467200179FD1 /* PreferencesController.h */,
+				EA3FC7161EB8467200179FD1 /* PreferencesController.m */,
+				EA5FDE451EB9F8E40040E94D /* PreferencesWindowController.h */,
+				EA5FDE461EB9F8E40040E94D /* PreferencesWindowController.m */,
+			);
+			path = PreferencesController;
+			sourceTree = "<group>";
+		};
+		EA3FC7181EB8485C00179FD1 /* CustomAppKitItems */ = {
+			isa = PBXGroup;
+			children = (
+				EA3FC7191EB8488200179FD1 /* ContextualButton.h */,
+				EA3FC71A1EB8488200179FD1 /* ContextualButton.m */,
+			);
+			path = CustomAppKitItems;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		84181FF31E9223B100F420F0 /* Search Spot */ = {
+		84181FF31E9223B100F420F0 /* Dissemino Seek */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 841820081E9223B100F420F0 /* Build configuration list for PBXNativeTarget "Search Spot" */;
+			buildConfigurationList = 841820081E9223B100F420F0 /* Build configuration list for PBXNativeTarget "Dissemino Seek" */;
 			buildPhases = (
 				84181FF01E9223B100F420F0 /* Sources */,
 				84181FF11E9223B100F420F0 /* Frameworks */,
@@ -206,9 +244,9 @@
 			);
 			dependencies = (
 			);
-			name = "Search Spot";
+			name = "Dissemino Seek";
 			productName = "Search Spot";
-			productReference = 84181FF41E9223B100F420F0 /* Search Spot.app */;
+			productReference = 84181FF41E9223B100F420F0 /* Dissemino Seek.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -239,7 +277,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84181FF31E9223B100F420F0 /* Search Spot */,
+				84181FF31E9223B100F420F0 /* Dissemino Seek */,
 			);
 		};
 /* End PBXProject section */
@@ -271,13 +309,17 @@
 				84181FFF1E9223B100F420F0 /* ViewController.m in Sources */,
 				84181FFC1E9223B100F420F0 /* main.m in Sources */,
 				8415F5D51E93658D004C7595 /* ResultListFlowLayout.m in Sources */,
+				EA3FC7171EB8467200179FD1 /* PreferencesController.m in Sources */,
 				842198E01E974C0E00D2C358 /* ItemDetailsController.m in Sources */,
 				84A060AE1E92A53200BDB71F /* QueryManager.m in Sources */,
+				EA3FC71B1EB8488200179FD1 /* ContextualButton.m in Sources */,
 				84AF84D21EA7469700C732BE /* NSFileManager+UnhiddenDirectories.m in Sources */,
 				84181FF91E9223B100F420F0 /* AppDelegate.m in Sources */,
 				8415F5D11E935CA8004C7595 /* SearchResultItemCell.m in Sources */,
 				8415F5CD1E93549C004C7595 /* ResultListCollectionController.m in Sources */,
+				EA5FDE471EB9F8E40040E94D /* PreferencesWindowController.m in Sources */,
 				84A060B11E92A6A300BDB71F /* NSMetadataQuery+Utilities.m in Sources */,
+				EAE3F77F1EBB341F00BA18FE /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +464,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		841820081E9223B100F420F0 /* Build configuration list for PBXNativeTarget "Search Spot" */ = {
+		841820081E9223B100F420F0 /* Build configuration list for PBXNativeTarget "Dissemino Seek" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				841820091E9223B100F420F0 /* Debug */,

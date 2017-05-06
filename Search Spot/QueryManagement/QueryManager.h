@@ -39,6 +39,8 @@ typedef void(^QueryResultChange)(NSMetadataQueryChangeType changeType);
 
 - (void)setSearchByKeys:(NSArray *) keys;
 
+- (void)setSortResultInOrder :(BOOL) isAscending;
+
 //@property BOOL searchContent;
 - (void)setSearchContent:(BOOL)value;
 

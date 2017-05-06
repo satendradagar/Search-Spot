@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ResultListCollectionController.h"
+#import "SearchScopeController.h"
 
 @interface SearchWindowController : NSWindowController
 {

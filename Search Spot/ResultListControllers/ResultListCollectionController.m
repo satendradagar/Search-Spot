@@ -12,14 +12,17 @@
 #import "ResultGroupHeader.h"
 #import "SearchResultItemCell.h"
 #import "ItemDetailsController.h"
+#import "SearchScopeController.h"
+#import "PreferencesWindowController.h"
 
 #define SearchResultCellId @"SearchResultItemCell"
 #define SearchHeaderId @"ResultGroupHeader"
 
 @interface ResultListCollectionController()<NSSplitViewDelegate>
 {
-   __block QueryManager *queryManager;
-        NSIndexPath *lastSelectedPath;
+//   __block QueryManager *queryManager;
+    NSIndexPath *lastSelectedPath;
+    PreferencesWindowController *prefWindowController;
 }
 
 @property (nonatomic,assign) IBOutlet NSTextField *bottomMessageFiled;
@@ -100,14 +103,14 @@
 }
 
 -(QueryManager *)queryManager{
-    return queryManager;
+    return _queryManager;
 }
 
 -(void)setupQueryResultManager{
-    queryManager = [[QueryManager alloc] init];
+    _queryManager = [[QueryManager alloc] init];
 //    [queryManager setSearchContent:YES];
     __weak __typeof(self)weakSelf = self;
-    [queryManager setResultChangeBlock:^(NSMetadataQueryChangeType changeType){
+    [_queryManager setResultChangeBlock:^(NSMetadataQueryChangeType changeType){
 //        NSLog(@"Results:\n%@",[queryManager.query.results valueForKey:kMDItemFSName]);
         switch (changeType) {
             case QueryDidStartGathering:
@@ -147,32 +150,32 @@
 
 -(void)searchStartForKeyword:(NSString *)keyword{
 
-    [queryManager.query enableUpdates];
-    [queryManager setSearchKey:keyword];
+    [_queryManager.query enableUpdates];
+    [_queryManager setSearchKey:keyword];
     
 }
 
 -(void)searchScopeForLocation:(NSArray *)locations{
 
-    [queryManager setScopePath:locations];
+    [_queryManager setScopePath:locations];
 
 }
 
 
 - (void)rearrangeWithGroupBy:(NSString *) key{
     
-    [queryManager setGroupByKey:key];
+    [_queryManager setGroupByKey:key];
     
 }
 
 - (void)setSearchByKey:(NSString *) key{
 
-    [queryManager setSearchByKey:key];
+    [_queryManager setSearchByKey:key];
 }
 
 - (void)setSearchByKeys:(NSArray *) keys{
     
-    [queryManager setSearchByKeys:keys];
+    [_queryManager setSearchByKeys:keys];
     
 }
 
@@ -187,7 +190,7 @@
 
 -(void)selectFirstObject{
     
-    if (queryManager.query.results.count) {
+    if (_queryManager.query.results.count) {
         NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:0];
         [self collectionView:_resultsList didSelectItemsAtIndexPaths:[NSSet setWithObject:path]];
         [self.resultsList selectItemsAtIndexPaths:[NSSet setWithObject:path] scrollPosition:NSCollectionViewScrollPositionTop];
@@ -201,6 +204,17 @@
  
 
 }
+
+
+-(IBAction)showPreferences:(id)sender{
+    NSStoryboard *storyBoard = [NSStoryboard storyboardWithName:@"Main" bundle:nil]; // get a reference to the storyboard
+    prefWindowController = [storyBoard instantiateControllerWithIdentifier:@"prefWindowController"]; // instantiate your window controller
+    [prefWindowController setContent:self.scopeController.cutomUrls];
+    [prefWindowController showWindow:self]; // show the window
+    
+}
+
+
 @end
 
 
@@ -211,7 +225,7 @@
  */
 - (NSInteger)collectionView:(NSCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    NSMetadataQueryResultGroup *group = queryManager.query.groupedResults[section];
+    NSMetadataQueryResultGroup *group = _queryManager.query.groupedResults[section];
     
     return group.results.count;
 }
@@ -227,7 +241,7 @@
 - (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath {
     
     SearchResultItemCell *item = (SearchResultItemCell *)[collectionView makeItemWithIdentifier:SearchResultCellId forIndexPath:indexPath];
-    NSMetadataQueryResultGroup *group = queryManager.query.groupedResults[indexPath.section];
+    NSMetadataQueryResultGroup *group = _queryManager.query.groupedResults[indexPath.section];
     [item configureWithMeta:group.results[indexPath.item]];
     if ([lastSelectedPath isEqual:indexPath]) {
         item.customSelection = YES;
@@ -242,7 +256,7 @@
  */
 - (NSInteger)numberOfSectionsInCollectionView:(NSCollectionView *)collectionView {
     
-    NSInteger count = queryManager.query.groupedResults.count;
+    NSInteger count = _queryManager.query.groupedResults.count;
     return count;
 }
 
@@ -250,7 +264,7 @@
     
     if ([kind isEqualToString:NSCollectionElementKindSectionHeader]) {
         
-        NSMetadataQueryResultGroup *group = queryManager.query.groupedResults[indexPath.section];
+        NSMetadataQueryResultGroup *group = _queryManager.query.groupedResults[indexPath.section];
         ResultGroupHeader *item = (ResultGroupHeader *)[collectionView makeSupplementaryViewOfKind:kind withIdentifier:SearchHeaderId forIndexPath:indexPath];
         [item configureWithGroup:group];
         return item;
@@ -279,7 +293,7 @@
         viewItem.customSelection = YES;
         lastSelectedPath = path;
         
-        NSMetadataQueryResultGroup *group = queryManager.query.groupedResults[path.section];
+        NSMetadataQueryResultGroup *group = _queryManager.query.groupedResults[path.section];
         NSMetadataItem *item = group.results[path.item];
         [_detailController previewItemDetailsForItem:item];
 

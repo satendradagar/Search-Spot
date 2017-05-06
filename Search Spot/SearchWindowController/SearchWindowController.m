@@ -13,6 +13,7 @@
     NSMenuItem *lastSelectedItem;
     NSMenuItem *lastSelectedSearchByItem;
     NSMutableArray *searchByKeys;
+    NSWindowController *myController ;
 }
 @property (nonatomic,assign) IBOutlet NSMenu *arrangeBy;
 
@@ -32,7 +33,7 @@
     self.listController = (ResultListCollectionController *)[self.window contentViewController];
     _searchFiled.delegate = self;
     [self.window performSelector:@selector(makeFirstResponder:) withObject:_searchFiled afterDelay:0.2];
-    NSMenuItem *item = [_arrangeBy itemAtIndex:2];
+    NSMenuItem *item = [_arrangeBy itemAtIndex:1];
     [_arrangeButton selectItem: item];
     [self seectionDidChanged:_arrangeButton];
     //kMDItemFSName kMDItemDisplayName  kMDItemKind kMDItemCreator kMDItemTextContent kMDItemPublishers kMDItemOrganizations
@@ -73,36 +74,40 @@
     NSLog(@"SELECTED:%ld",(long)sender.indexOfSelectedItem);
 
     switch (sender.indexOfSelectedItem) {
-            
         case 1:
+        {
+            groupString = CFStringCreateWithCString(NULL, "None", kCFStringEncodingMacRoman);
+        }
+            break;
+        case 2:
         {
              groupString = kMDItemKind;
         }
             break;
-        case 2:
+        case 3:
         {
             groupString = kMDItemContentType;
 
         }
             break;
-        case 3:
+        case 4:
         {
             groupString = kMDItemFSCreationDate;
 
         }
             break;
-        case 4:
+        case 5:
         {
             groupString = kMDItemContentModificationDate;
 
         }
             break;
-        case 5:
+        case 6:
         {
             groupString = kMDItemLastUsedDate;
         }
             break;
-        case 6:
+        case 7:
         {
             groupString = kMDItemFSSize;
 
@@ -212,6 +217,24 @@
     NSLog(@"controlTextDidChange: %@",_searchFiled.stringValue);
     [self.listController searchStartForKeyword:_searchFiled.stringValue];
 
+}
+
+-(IBAction)showPreferences:(id)sender{
+    
+    [self.listController showPreferences:sender];
+}
+
+-(IBAction)stopQueryPreseed:(NSButton *)sender{
+    
+    [self.listController.queryManager.query stopQuery];
+    
+}
+
+-(IBAction)sortAscDescChanged:(NSSegmentedControl *)sender{
+    
+    [self.listController.queryManager setSortResultInOrder:![sender selectedSegment]];
+//    [self.listController.queryManager.query stopQuery];
+    
 }
 
 

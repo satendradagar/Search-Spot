@@ -298,6 +298,13 @@
     }
 }
 
+- (void)setSortResultInOrder :(BOOL) isAscending{
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:(id)kMDItemDisplayName
+                                                                   ascending:isAscending selector:@selector(caseInsensitiveCompare:)];
+    [self.query setSortDescriptors:@[sortDescriptor]];
+
+}
 
 - (NSString *)searchKey {
     return searchKey;
