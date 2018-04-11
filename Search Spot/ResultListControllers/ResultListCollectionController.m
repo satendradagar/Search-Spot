@@ -112,17 +112,24 @@
     __weak __typeof(self)weakSelf = self;
     [_queryManager setResultChangeBlock:^(NSMetadataQueryChangeType changeType){
 //        NSLog(@"Results:\n%@",[queryManager.query.results valueForKey:kMDItemFSName]);
+        NSLog(@"changeType: %lu",(unsigned long)changeType);
+
         switch (changeType) {
             case QueryDidStartGathering:
             {
 //                [weakSelf.resultsList reloadData];
 
                 
+                
             }
                 break;
             case QueryDidFinishGathering:
             {
+//                [weakSelf.queryManager.query disableUpdates];
+
                 [weakSelf refreshViewWithNewItemData];
+//                [weakSelf.queryManager.query enableUpdates];
+
             }
                 break;
                 
@@ -134,9 +141,9 @@
                 
             case QueryDidUpdateGathering:
             {
-                [weakSelf.queryManager.query disableUpdates];
+//                [weakSelf.queryManager.query disableUpdates];
                 [weakSelf refreshViewWithNewItemData];
-                [weakSelf.queryManager.query enableUpdates];
+//                [weakSelf.queryManager.query enableUpdates];
 
             }
                 break;

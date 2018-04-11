@@ -55,8 +55,10 @@
         [self.query setSortDescriptors:@[sortDescriptor]];
         // For the groups, we want the first grouping by the kind, and the second by the file size.
         [self.query setGroupingAttributes:[NSArray arrayWithObjects:(id)kMDItemCreator, nil]];
+        [self.query enableUpdates];
         [self.query setDelegate:self];
     }
+    
     return self;
 }
 
@@ -95,7 +97,7 @@
     }
     if (nil != _resultChangeBlock) {
         _resultChangeBlock(updateType);
-
+        [self.query enableUpdates];
     }
 
 }
@@ -182,7 +184,9 @@
 
     NSMutableArray *predicates = [NSMutableArray new];
     for (NSString *key in searchByKeys) {
-        
+        if (0 == searchKey.length) {
+            continue;
+        }
         NSPredicate *comparisionPred = [NSComparisonPredicate
                                  predicateWithLeftExpression:[NSExpression expressionForKeyPath:key]
                                  rightExpression:[NSExpression expressionForConstantValue:self.searchKey]
@@ -193,8 +197,16 @@
    
     }
     NSPredicate *compPred = nil;
+    if (predicates.count == 0) {
+        compPred = [NSComparisonPredicate
+                                        predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"M"]
+                                        rightExpression:[NSExpression expressionForConstantValue:@"S"]
+                                        modifier:NSDirectPredicateModifier
+                                        type:type
+                                        options:options];
 
-    if (predicates.count == 1) {
+    }
+    else if (predicates.count == 1) {
         compPred = predicates.firstObject;
     }
     else{
