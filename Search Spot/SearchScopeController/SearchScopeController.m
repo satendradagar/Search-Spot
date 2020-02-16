@@ -10,6 +10,7 @@
 #import "NSFileManager+UnhiddenDirectories.h"
 #import "ContextualButton.h"
 #import "Constants.h"
+#import "NSURL+RestoreAccessPermissions.h"
 
 @implementation CustomURLs
 
@@ -32,13 +33,6 @@
 @end
 
 @implementation SearchScopeController
-/*
- <buttonCell key="cell" type="recessed" title="Recessed" bezelStyle="recessed" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZbB-0U-x5N">
- <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
- <font key="font" metaFont="systemBold" size="12"/>
- </buttonCell>
-
- */
 
 
 - (void)viewDidLoad {
@@ -135,7 +129,9 @@
 
 -(void)viewDidAppear{
     [super viewDidAppear];
-    [self seectionDidChanged:_home];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self seectionDidChanged:_thisMac];
+    });
 
 }
 
@@ -153,9 +149,10 @@
         {
             location = NSMetadataQueryLocalComputerScope;
             
-            locations = [fileManager directoriesAtPath:NSOpenStepRootDirectory()];
+//            locations = [fileManager directoriesAtPath:NSOpenStepRootDirectory()];
             // theArray at this point contains all the filenames
-            NSLog(@"%@",locations);
+            NSLog(@"Locations:%@",locations);
+            locations = @[[NSURL fileURLWithPath:@"/"]];
 
         }
             break;
@@ -163,18 +160,19 @@
         case 2:
         {
             location = NSMetadataQueryUserHomeScope;
-
-            locations = [fileManager directoriesAtPath:NSHomeDirectory()];
+            
+//            locations = [fileManager directoriesAtPath:NSHomeDirectory()];
             // theArray at this point contains all the filenames
             NSLog(@"%@",locations);
-   
+            locations = @[[NSURL fileURLWithPath:[NSString stringWithFormat:@"/Users/%@",NSUserName()]]];;
+
         }
             break;
 
         case 3:
         {
             location = [NSString stringWithFormat:@"%@",@"/Users/Shared/"];
-            locations = @[location];
+            locations = @[[NSURL fileURLWithPath:location]];
 
         }
             break;
@@ -182,7 +180,7 @@
         case 4:
         {
             location = [NSString stringWithFormat:@"%@",@"/Applications"];
-            locations = @[location];
+            locations = @[[NSURL fileURLWithPath:location]];
         }
             break;
  
@@ -197,23 +195,64 @@
         }
             break;
     }
+    NSURL *url = locations.firstObject;
+    NSURL *bookmarked = [NSURL urlForFilePathByRestoringPermissions:url.absoluteString];
+    if( nil == bookmarked) {
+        NSLog(@"---- bookmarkfor:%@",url);
+        [self openFilePickerForUrl:url completion:^(BOOL result, NSURL *updatedURL) {
+            if (result == YES) {
+                [updatedURL storeAccessPermissions];
+                //TODO: update scope lookup use
+                NSArray *updatedLocations = @[updatedURL];
+                [_listController searchScopeForLocation:updatedLocations];
+                
+            }
+        }];
+        return;
+    }
+    else{
+        NSLog(@"++++ bookmarkfor:%@",bookmarked);
+    }
+    //TODO: update scope lookup use
+
+    locations = @[bookmarked];
+
     [_listController searchScopeForLocation:locations];
 }
 
 -(IBAction)didClickChooseFile:(id)sender{
-    
+    NSURL *url = [NSURL fileURLWithPath:@"/Volumes/"];
+    [self openFilePickerForUrl:url completion:^(BOOL result, NSURL *updatedURL) {
+        if (result) {
+            [updatedURL storeAccessPermissions];
+            [self addButtonWithUrl:updatedURL];
+
+        }
+    }];
+}
+
+-(void)openFilePickerForUrl:(NSURL *)url completion:(void (^)(BOOL result, NSURL *updatedURL))block{
+  
     NSOpenPanel* openDlg = [NSOpenPanel openPanel];
     
     [openDlg setPrompt:@"Add to Search List"];
     [openDlg setCanChooseFiles:NO];
     [openDlg setCanChooseDirectories:YES];
-    [openDlg setDirectoryURL:[NSURL fileURLWithPath:@"/Volumes/"]];
+    [openDlg setDirectoryURL:url];
     [openDlg beginWithCompletionHandler:^(NSInteger result){
-        
+        NSLog(@"URL:%@",openDlg.URL);
         if (result == NSModalResponseOK) {
-            [self addButtonWithUrl:openDlg.URL];
+//            if (should) {
+//
+//                [self addButtonWithUrl:openDlg.URL];
+//            }
+            block(YES, openDlg.URL);
+        }
+        else{
+            block(NO,nil);
         }
     }];
+
 }
 
 @end

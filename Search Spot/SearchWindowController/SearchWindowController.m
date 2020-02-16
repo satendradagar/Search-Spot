@@ -37,7 +37,7 @@
     [_arrangeButton selectItem: item];
     [self seectionDidChanged:_arrangeButton];
     //kMDItemFSName kMDItemDisplayName  kMDItemKind kMDItemCreator kMDItemTextContent kMDItemPublishers kMDItemOrganizations
-    NSArray<NSString *> *searchByOptions = @[@"SearchBy:Tag",@"SearchBy:File Name",@"SearchBy:Display Name",@"SearchBy:Type",@"SearchBy:Application Type",@"SearchBy:Text Content",@"SearchBy:Publisher",@"SearchBy:Organization"];
+    NSArray<NSString *> *searchByOptions = @[@"SearchBy:File Name",@"SearchBy:Tag",@"SearchBy:Display Name",@"SearchBy:Type",@"SearchBy:Application Type",@"SearchBy:Text Content",@"SearchBy:Publisher",@"SearchBy:Organization"];
     [_searchBYButton removeAllItems];
     [_searchBYButton addItemsWithTitles:searchByOptions];
     for (NSMenuItem *item in _searchBYButton.menu.itemArray) {
@@ -72,6 +72,11 @@
 
      CFStringRef groupString = kMDItemKind;
     NSLog(@"SELECTED:%ld",(long)sender.indexOfSelectedItem);
+    NSUInteger selectedIndex = sender.indexOfSelectedItem;
+    for (NSMenuItem *item in sender.menu.itemArray) {
+        [item setState:NSOffState];
+    }
+    [sender selectItemAtIndex:selectedIndex];
 
     switch (sender.indexOfSelectedItem) {
         case 1:
@@ -129,17 +134,24 @@
     //kMDItemFSName kMDItemDisplayName  kMDItemKind kMDItemCreator kMDItemTextContent kMDItemPublishers kMDItemOrganizations
     CFStringRef groupString = kMDItemFSName;
     NSLog(@"SELECTED:%ld",(long)sender.indexOfSelectedItem);
-    
+    NSUInteger selectedIndex = sender.indexOfSelectedItem;
+    for (NSMenuItem *item in sender.menu.itemArray) {
+        [item setState:NSOffState];
+    }
+    [sender selectItemAtIndex:selectedIndex];
+
+
     switch (sender.indexOfSelectedItem) {
         case 0:
         {
-            groupString = (CFStringRef )@"kMDItemUserTags";
+            groupString = kMDItemFSName;
+
         }
             break;
 
         case 1:
         {
-            groupString = kMDItemFSName;
+            groupString = (CFStringRef )@"kMDItemUserTags";
         }
             break;
         case 2:
