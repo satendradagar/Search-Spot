@@ -692,7 +692,7 @@
                                     <popUpButton key="view" springLoaded="YES" id="8vf-zL-6Zy">
                                         <rect key="frame" x="6" y="14" width="87" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="roundTextured" title="Group By" alternateTitle="Group Results By" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" refusesFirstResponder="YES" state="on" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" autoenablesItems="NO" altersStateOfSelectedItem="NO" selectedItem="z4H-QE-WBb" id="SM0-3x-apY">
+                                        <popUpButtonCell key="cell" type="roundTextured" title="None" alternateTitle="Group Results By" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" refusesFirstResponder="YES" borderStyle="border" tag="6" imageScaling="proportionallyUpOrDown" inset="2" autoenablesItems="NO" altersStateOfSelectedItem="NO" selectedItem="z4H-QE-WBb" id="SM0-3x-apY">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
                                             <menu key="menu" title="OtherViews" autoenablesItems="NO" id="RXr-a5-nBo">
@@ -746,7 +746,7 @@
                                     <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="b14-93-y9L">
                                         <rect key="frame" x="0.0" y="14" width="305" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Type Keyword To Search" usesSingleLineMode="YES" bezelStyle="round" id="aDF-cf-KaN">
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Type Keyword To Search" usesSingleLineMode="YES" bezelStyle="round" recentsAutosaveName="History" id="aDF-cf-KaN">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1342,6 +1342,14 @@
                                                             <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
+                                                        <connections>
+                                                            <binding destination="NlB-BA-F1k" name="hidden" keyPath="itemObject.kMDItemFSCreationDate" id="lfz-O1-EUp">
+                                                                <dictionary key="options">
+                                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                                    <string key="NSValueTransformerName">NSIsNil</string>
+                                                                </dictionary>
+                                                            </binding>
+                                                        </connections>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ybt-aj-quk">
                                                         <rect key="frame" x="-1" y="67" width="170" height="17"/>
@@ -1353,6 +1361,14 @@
                                                             <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
+                                                        <connections>
+                                                            <binding destination="NlB-BA-F1k" name="hidden" keyPath="itemObject.kMDItemFSContentChangeDate" id="Eyv-xJ-dmm">
+                                                                <dictionary key="options">
+                                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                                    <string key="NSValueTransformerName">NSIsNil</string>
+                                                                </dictionary>
+                                                            </binding>
+                                                        </connections>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SDm-AY-lkE">
                                                         <rect key="frame" x="-1" y="50" width="170" height="17"/>
@@ -1364,6 +1380,14 @@
                                                             <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
+                                                        <connections>
+                                                            <binding destination="NlB-BA-F1k" name="hidden" keyPath="itemObject.kMDItemLastUsedDate" id="LeU-Ks-ej6">
+                                                                <dictionary key="options">
+                                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                                    <string key="NSValueTransformerName">NSIsNil</string>
+                                                                </dictionary>
+                                                            </binding>
+                                                        </connections>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oJX-UC-txH">
                                                         <rect key="frame" x="178" y="100" width="171" height="17"/>
@@ -1450,6 +1474,14 @@
                                                             <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
+                                                        <connections>
+                                                            <binding destination="NlB-BA-F1k" name="hidden" keyPath="itemObject.kMDItemKind" id="3sW-Rk-b5t">
+                                                                <dictionary key="options">
+                                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                                    <string key="NSValueTransformerName">NSIsNil</string>
+                                                                </dictionary>
+                                                            </binding>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>

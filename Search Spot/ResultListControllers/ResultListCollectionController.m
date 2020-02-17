@@ -200,7 +200,7 @@
     if (_queryManager.query.results.count) {
         NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:0];
         [self collectionView:_resultsList didSelectItemsAtIndexPaths:[NSSet setWithObject:path]];
-        [self.resultsList selectItemsAtIndexPaths:[NSSet setWithObject:path] scrollPosition:NSCollectionViewScrollPositionTop];
+        [self.resultsList selectItemsAtIndexPaths:[NSSet setWithObject:path] scrollPosition:NSCollectionViewScrollPositionNone];
         self.bottomMessageFiled.stringValue = [NSString stringWithFormat:@"Showing results for %lu items in %lu  Categories", [self queryManager].query.results.count,[self queryManager].query.groupedResults.count];
 
     }
