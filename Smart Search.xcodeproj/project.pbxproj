@@ -71,7 +71,7 @@
 		84FC4CB31EA1B3B30076D14E /* SearchWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchWindowController.m; path = "Search Spot/SearchWindowController/SearchWindowController.m"; sourceTree = "<group>"; };
 		9A53D21723E48E0B007ECE89 /* NSURL+RestoreAccessPermissions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+RestoreAccessPermissions.m"; sourceTree = "<group>"; };
 		9A53D21823E48E0B007ECE89 /* NSURL+RestoreAccessPermissions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+RestoreAccessPermissions.h"; sourceTree = "<group>"; };
-		9A801ACB21CBFC4F00E96102 /* Dissemino Seek.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Dissemino Seek.entitlements"; sourceTree = "<group>"; };
+		9A801ACB21CBFC4F00E96102 /* Smart Search.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Smart Search.entitlements"; sourceTree = "<group>"; };
 		EA3FC7151EB8467200179FD1 /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
 		EA3FC7161EB8467200179FD1 /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
 		EA3FC7191EB8488200179FD1 /* ContextualButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextualButton.h; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		84181FEB1E9223B100F420F0 = {
 			isa = PBXGroup;
 			children = (
-				9A801ACB21CBFC4F00E96102 /* Dissemino Seek.entitlements */,
+				9A801ACB21CBFC4F00E96102 /* Smart Search.entitlements */,
 				84181FF61E9223B100F420F0 /* Search Spot */,
 				84181FF71E9223B100F420F0 /* AppDelegate.h */,
 				84181FF81E9223B100F420F0 /* AppDelegate.m */,
@@ -453,7 +453,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Dissemino Seek.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Smart Search.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -471,7 +471,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Dissemino Seek.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Smart Search.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
