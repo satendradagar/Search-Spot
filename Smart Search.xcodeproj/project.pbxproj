@@ -41,7 +41,7 @@
 		8415F5D01E935CA8004C7595 /* SearchResultItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultItemCell.xib; sourceTree = "<group>"; };
 		8415F5D31E93658D004C7595 /* ResultListFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultListFlowLayout.h; sourceTree = "<group>"; };
 		8415F5D41E93658D004C7595 /* ResultListFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultListFlowLayout.m; sourceTree = "<group>"; };
-		84181FF41E9223B100F420F0 /* Dissemino Seek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dissemino Seek.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84181FF41E9223B100F420F0 /* Smart Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smart Search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84181FF71E9223B100F420F0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "Search Spot/AppDelegate.h"; sourceTree = "<group>"; };
 		84181FF81E9223B100F420F0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = "Search Spot/AppDelegate.m"; sourceTree = "<group>"; };
 		84181FFB1E9223B100F420F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -133,7 +133,7 @@
 		84181FF51E9223B100F420F0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84181FF41E9223B100F420F0 /* Dissemino Seek.app */,
+				84181FF41E9223B100F420F0 /* Smart Search.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -247,9 +247,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		84181FF31E9223B100F420F0 /* Dissemino Seek */ = {
+		84181FF31E9223B100F420F0 /* Smart Search */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 841820081E9223B100F420F0 /* Build configuration list for PBXNativeTarget "Dissemino Seek" */;
+			buildConfigurationList = 841820081E9223B100F420F0 /* Build configuration list for PBXNativeTarget "Smart Search" */;
 			buildPhases = (
 				84181FF01E9223B100F420F0 /* Sources */,
 				84181FF11E9223B100F420F0 /* Frameworks */,
@@ -259,9 +259,9 @@
 			);
 			dependencies = (
 			);
-			name = "Dissemino Seek";
+			name = "Smart Search";
 			productName = "Search Spot";
-			productReference = 84181FF41E9223B100F420F0 /* Dissemino Seek.app */;
+			productReference = 84181FF41E9223B100F420F0 /* Smart Search.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -271,7 +271,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = "Reboot Computer Services";
+				ORGANIZATIONNAME = "CoreBits Software Solutions Pvt Ltd";
 				TargetAttributes = {
 					84181FF31E9223B100F420F0 = {
 						CreatedOnToolsVersion = 8.3;
@@ -285,7 +285,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 84181FEF1E9223B100F420F0 /* Build configuration list for PBXProject "Search Spot" */;
+			buildConfigurationList = 84181FEF1E9223B100F420F0 /* Build configuration list for PBXProject "Smart Search" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -299,7 +299,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84181FF31E9223B100F420F0 /* Dissemino Seek */,
+				84181FF31E9223B100F420F0 /* Smart Search */,
 			);
 		};
 /* End PBXProject section */
@@ -488,7 +488,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		84181FEF1E9223B100F420F0 /* Build configuration list for PBXProject "Search Spot" */ = {
+		84181FEF1E9223B100F420F0 /* Build configuration list for PBXProject "Smart Search" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				841820061E9223B100F420F0 /* Debug */,
@@ -497,7 +497,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		841820081E9223B100F420F0 /* Build configuration list for PBXNativeTarget "Dissemino Seek" */ = {
+		841820081E9223B100F420F0 /* Build configuration list for PBXNativeTarget "Smart Search" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				841820091E9223B100F420F0 /* Debug */,

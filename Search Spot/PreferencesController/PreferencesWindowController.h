@@ -3,7 +3,7 @@
 //  Search Spot
 //
 //  Created by Satendra Singh on 03/05/17.
-//  Copyright © 2017 Reboot Computer Services. All rights reserved.
+//  Copyright © 2020 CoreBits Software Solutions Pvt Ltd. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

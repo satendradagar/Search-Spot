@@ -3,7 +3,7 @@
 //  Search Spot
 //
 //  Created by admin on 18/04/17.
-//  Copyright © 2017 Reboot Computer Services. All rights reserved.
+//  Copyright © 2020 CoreBits Software Solutions Pvt Ltd. All rights reserved.
 //
 
 #import "SearchScopeController.h"
@@ -142,7 +142,7 @@
     lastSelected = sender;
     NSArray *locations = nil;
     NSString *location = NSMetadataQueryUserHomeScope;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
 
     switch (sender.tag) {
         case 1:
