@@ -47,9 +47,18 @@
 
 -(void)previewItemDetailsForItem:(NSMetadataItem *)item{
     MetaLookObject *obj = [MetaLookObject lookObjectWithMeta:item];
-    [quickView setPreviewItem:obj];
-    [quickView refreshPreviewItem];
     self.itemObject = item;
+    NSLog(@"%@", obj.previewItemURL);
+    if ([obj conformsToProtocol:@protocol(QLPreviewItem)]) {
+      //conformance!
+        [quickView setPreviewItem:obj];
+
+    }
+    else{
+        NSLog(@"Unsupported object");
+    }
+//    [quickView refreshPreviewItem];
+    
 //    [quickView setPreviewItem:(id<QLPreviewItem>)]
 }
 
