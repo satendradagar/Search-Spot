@@ -73,6 +73,7 @@
 		84FC4CB31EA1B3B30076D14E /* SearchWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchWindowController.m; path = "Search Spot/SearchWindowController/SearchWindowController.m"; sourceTree = "<group>"; };
 		9A35642E23FC2E48003E0BE6 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		9A35642F23FC2E48003E0BE6 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		9A3C79D223FD8C8800006D08 /* iSearch.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iSearch.pch; sourceTree = SOURCE_ROOT; };
 		9A53D21723E48E0B007ECE89 /* NSURL+RestoreAccessPermissions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+RestoreAccessPermissions.m"; sourceTree = "<group>"; };
 		9A53D21823E48E0B007ECE89 /* NSURL+RestoreAccessPermissions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+RestoreAccessPermissions.h"; sourceTree = "<group>"; };
 		9A801ACB21CBFC4F00E96102 /* Smart Search.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Smart Search.entitlements"; sourceTree = "<group>"; };
@@ -166,6 +167,7 @@
 		84181FFA1E9223B100F420F0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9A3C79D223FD8C8800006D08 /* iSearch.pch */,
 				84181FFB1E9223B100F420F0 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -513,6 +515,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = X6FQ433AWK;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -520,9 +523,15 @@
 					"$(PROJECT_DIR)/com.twitter.crashlytics.mac-manual",
 					"$(PROJECT_DIR)/Fabric",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PRODUCT_NAME).pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "Search Spot/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.corebits.smartsearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -537,6 +546,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = X6FQ433AWK;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -544,9 +554,11 @@
 					"$(PROJECT_DIR)/com.twitter.crashlytics.mac-manual",
 					"$(PROJECT_DIR)/Fabric",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PRODUCT_NAME).pch";
 				INFOPLIST_FILE = "Search Spot/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.corebits.smartsearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
